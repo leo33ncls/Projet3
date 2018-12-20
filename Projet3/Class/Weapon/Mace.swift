@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class Mace: Weapon {
+    
+    // Initialization
+    init() {
+        super.init(name: "Massue", damage: 5)
+    }
+}

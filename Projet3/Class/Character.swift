@@ -9,14 +9,20 @@
 import Foundation
 
 class Character {
+    
+    // Properties
     var characterName: String
+    var type: String
     var health: Int
     var weapon: Weapon
     
-    init(characterName: String, health: Int, weapon: Weapon) {
+    // Initialization
+    init(characterName: String, type: String, health: Int, weapon: Weapon) {
         self.characterName = characterName
+        self.type = type
         self.health = health
         self.weapon = weapon
     }
+    
 }
 

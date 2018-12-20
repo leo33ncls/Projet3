@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class Magus: Character {
+    
+    // Initialization
+    init(characterName: String) {
+        super.init(characterName: characterName, type: "Mage", health: 100, weapon: Sword())
+    }
+}

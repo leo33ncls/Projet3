@@ -13,8 +13,8 @@ class Game {
     // Properties
     var players = [Player]()
     var nameArray = [String]()
-    var characterFighter = Character(characterName: "", type: "", health: 0, weapon: Sword())
-    var characterTarget = Character(characterName: "", type: "", health: 0, weapon: Sword())
+    var characterFighter = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
+    var characterTarget = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     
     
     // Methods
@@ -115,7 +115,7 @@ class Game {
     }
     
     // Method allowing to choose a character of your team who is going to attack the enemy
-    func choiceFichter(playerIndex: Int) {
+    func choiceFighter(playerIndex: Int) {
         print("\(players[playerIndex].name), quel personnage va attaquer l'ennemie ou soigner un allié ?"
             + "\n1 \(players[playerIndex].team[0].characterName) (vie: \(players[playerIndex].team[0].health), dégats: \(players[playerIndex].team[0].weapon.damage))"
             + "\n2 \(players[playerIndex].team[1].characterName) (vie: \(players[playerIndex].team[1].health), dégats: \(players[playerIndex].team[1].weapon.damage))"
@@ -130,7 +130,7 @@ class Game {
                 characterFighter = players[playerIndex].team[2]
             default:
                 print("Je ne comprends pas. Veuillez réassayer.")
-                choiceFichter(playerIndex: playerIndex)
+                choiceFighter(playerIndex: playerIndex)
             }
         }
     }
@@ -176,18 +176,42 @@ class Game {
         }
     }
     
-    // Method which makes the attack and give information on the consequences
-    func attack() {
-        let healthTarget = characterTarget.health - characterFighter.weapon.damage
-        print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName)."
-            + "\nIl reste \(healthTarget) de vie à \(characterTarget.characterName)")
+    // Method which check if the characters involved in the fight are dead
+    func areAlive(characterFighter: Character, characterTarget: Character, playerIndex: Int, playerEnemyIndex: Int) {
+        if characterFighter.health > 0 && characterTarget.health > 0 {
+            characterFighter.attack(target: characterTarget)
+        } else if characterFighter.health <= 0 {
+            print("\(characterFighter.characterName) est mort ! Il ne peut pas attaquer ! \n")
+            choiceFighter(playerIndex: playerIndex)
+            characterFighter.attack(target: characterTarget)
+        } else {
+            print("\(characterTarget.characterName) est déjà mort ! Choisissez une autre cible. \n")
+            choiceTarget(playerIndex: playerIndex ,playerEnemyIndex: playerEnemyIndex)
+            characterFighter.attack(target: characterTarget)
+        }
+    }
+    
+    // Method which check if the team are still alive
+    func isTeamAlive(indexPlayer: Int) -> Bool{
+        var isTeamAlive: Bool
+        if players[indexPlayer].team[0].health == 0 && players[indexPlayer].team[1].health == 0 && players[indexPlayer].team[2].health == 0 {
+            isTeamAlive = false
+        } else {
+            isTeamAlive = true
+        }
+        return isTeamAlive
     }
     
     // Method which represents a round
     func round(playerIndex: Int, playerIndexEnemy: Int) {
-        choiceFichter(playerIndex: playerIndex)
+        choiceFighter(playerIndex: playerIndex)
         choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
-        attack()
+        areAlive(characterFighter: characterFighter, characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
+        if characterFighter.type == "Mage" {
+            print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)")
+        } else {
+            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)")
+        }
     }
     
     

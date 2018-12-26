@@ -14,18 +14,26 @@ class Character {
     var characterName: String
     var type: String
     var health: Int
+    var healthMax: Int
     var weapon: Weapon
     
     // Initialization
-    init(characterName: String, type: String, health: Int, weapon: Weapon) {
+    init(characterName: String, type: String, health: Int, healthMax: Int, weapon: Weapon) {
         self.characterName = characterName
         self.type = type
         self.health = health
+        self.healthMax = healthMax
         self.weapon = weapon
     }
     
     func attack(target: Character) {
-        target.health -= weapon.damage
+        if target.health < weapon.damage {
+            target.health = 0
+        } else if target.healthMax < (target.health - weapon.damage) {
+            target.health = target.healthMax
+        } else {
+            target.health -= weapon.damage
+        }
     }
 }
 

@@ -12,6 +12,6 @@ class Colossus: Character {
     
     // Initialization
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Colosse", health: 200, weapon: Mace())
+        super.init(characterName: characterName, type: "Colosse", health: 200, healthMax: 200, weapon: Mace())
     }
 }

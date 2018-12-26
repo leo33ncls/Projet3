@@ -12,6 +12,6 @@ class Magus: Character {
     
     // Initialization
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Mage", health: 100, weapon: Wand())
+        super.init(characterName: characterName, type: "Mage", health: 100, healthMax: 100, weapon: Wand())
     }
 }

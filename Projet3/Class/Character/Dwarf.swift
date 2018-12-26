@@ -12,7 +12,7 @@ class Dwarf: Character {
     
     // Initialization
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Nain",health: 50, weapon: Axe())
+        super.init(characterName: characterName, type: "Nain",health: 50, healthMax: 50, weapon: Axe())
     }
     
 }

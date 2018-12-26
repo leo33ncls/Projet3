@@ -24,5 +24,8 @@ class Character {
         self.weapon = weapon
     }
     
+    func attack(target: Character) {
+        target.health -= weapon.damage
+    }
 }
 

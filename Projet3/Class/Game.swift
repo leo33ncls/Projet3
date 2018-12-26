@@ -105,17 +105,13 @@ class Game {
     }
     
     // Method wich displays the team's information
-    func teamInformation() {
-        print("Jouer 1: \(players[0].name)"
-            + " \nL'équipe se compose de:"
-            + " \nUn \(players[0].team[0].type) nommé \(players[0].team[0].characterName) armé \(players[0].team[0].weapon.name) ayant \(players[0].team[0].health) points de vie.)"
-            + " \nUn \(players[0].team[1].type) nommé \(players[0].team[1].characterName) armé \(players[0].team[1].weapon.name) ayant \(players[0].team[1].health) points de vie.)"
-            + " \nUn \(players[0].team[2].type) nommé \(players[0].team[2].characterName) armé \(players[0].team[2].weapon.name) ayant \(players[0].team[2].health) points de vie.) \n")
-        print("Jouer 2: \(players[1].name)"
-            + " \nL'équipe se compose de:"
-            + " \nUn \(players[1].team[0].type) nommé \(players[1].team[0].characterName) armé \(players[1].team[0].weapon.name) ayant \(players[1].team[0].health) points de vie.)"
-            + " \nUn \(players[1].team[1].type) nommé \(players[1].team[1].characterName) armé \(players[1].team[1].weapon.name) ayant \(players[1].team[1].health) points de vie.)"
-            + " \nUn \(players[1].team[2].type) nommé \(players[1].team[2].characterName) armé \(players[1].team[2].weapon.name) ayant \(players[1].team[2].health) points de vie.) \n")
+    func teamInformation(playerIndex: Int) {
+        print("Joueur: \(players[playerIndex].name)"
+            + " \nL'équipe se compose de:")
+        for i in 0...2 {
+            print("Un \(players[playerIndex].team[i].type) nommé \(players[playerIndex].team[i].characterName) armé \(players[playerIndex].team[i].weapon.name) ayant \(players[playerIndex].team[i].health) points de vie.")
+        }
+        print("\n")
     }
     
     // Method allowing to choose a character of your team who is going to attack the enemy
@@ -179,7 +175,6 @@ class Game {
         while players.count < 2 {
              createPlayer()
         }
-        teamInformation()
         round()
         
     }

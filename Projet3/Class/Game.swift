@@ -115,41 +115,63 @@ class Game {
     }
     
     // Method allowing to choose a character of your team who is going to attack the enemy
-    func choiceFichter() {
-        print("\(players[0].name), quel personnage va attaquer l'ennemie ?"
-            + "\n1 \(players[0].team[0].characterName)"
-            + "\n2 \(players[0].team[1].characterName)"
-            + "\n3 \(players[0].team[2].characterName)")
+    func choiceFichter(playerIndex: Int) {
+        print("\(players[playerIndex].name), quel personnage va attaquer l'ennemie ou soigner un allié ?"
+            + "\n1 \(players[playerIndex].team[0].characterName) (vie: \(players[playerIndex].team[0].health), dégats: \(players[playerIndex].team[0].weapon.damage))"
+            + "\n2 \(players[playerIndex].team[1].characterName) (vie: \(players[playerIndex].team[1].health), dégats: \(players[playerIndex].team[1].weapon.damage))"
+            + "\n3 \(players[playerIndex].team[2].characterName) (vie: \(players[playerIndex].team[2].health), dégats: \(players[playerIndex].team[2].weapon.damage))")
         if let choice = readLine() {
             switch choice {
             case "1":
-                characterFighter = players[0].team[0]
+                characterFighter = players[playerIndex].team[0]
             case "2":
-                characterFighter = players[0].team[1]
+                characterFighter = players[playerIndex].team[1]
             case "3":
-                characterFighter = players[0].team[2]
+                characterFighter = players[playerIndex].team[2]
             default:
-                print("Je ne comprends pas")
+                print("Je ne comprends pas. Veuillez réassayer.")
+                choiceFichter(playerIndex: playerIndex)
             }
         }
     }
     
     // Method allowing to choose an enemy character to attack
-    func choiceTarget() {
-        print("\(players[0].name), quel est la cible ?"
-            + "\n1 \(players[1].team[0].characterName)"
-            + "\n2 \(players[1].team[1].characterName)"
-            + "\n3 \(players[1].team[2].characterName)")
-        if let choice = readLine() {
-            switch choice {
-            case "1":
-                characterTarget = players[1].team[0]
-            case "2":
-                characterTarget = players[1].team[1]
-            case "3":
-                characterTarget = players[1].team[2]
-            default:
-                print("Je ne comprends pas")
+    func choiceTarget(playerIndex: Int, playerEnemyIndex: Int) {
+        if characterFighter.weapon.damage < 0 {
+            print("\(players[playerIndex].name), quel personnage va être soigner ?"
+                + "\n1 \(players[playerIndex].team[0].characterName) (vie: \(players[playerIndex].team[0].health), arme: \(players[playerIndex].team[0].weapon.name))"
+                + "\n2 \(players[playerIndex].team[1].characterName) (vie: \(players[playerIndex].team[1].health), arme: \(players[playerIndex].team[1].weapon.name))"
+                + "\n3 \(players[playerIndex].team[2].characterName) (vie: \(players[playerIndex].team[2].health), arme: \(players[playerIndex].team[2].weapon.name))")
+            if let choice = readLine() {
+                switch choice {
+                case "1":
+                    characterTarget = players[playerIndex].team[0]
+                case "2":
+                    characterTarget = players[playerIndex].team[1]
+                case "3":
+                    characterTarget = players[playerIndex].team[2]
+                default:
+                    print("Je ne comprends pas. Veuillez ressayer.")
+                    choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
+                }
+            }
+        } else {
+            print("\(players[playerIndex].name), quelle est la cible ?"
+                + "\n1 \(players[playerEnemyIndex].team[0].characterName) (vie: \(players[playerEnemyIndex].team[0].health), arme: \(players[playerEnemyIndex].team[0].weapon.name))"
+                + "\n2 \(players[playerEnemyIndex].team[1].characterName) (vie: \(players[playerEnemyIndex].team[1].health), arme: \(players[playerEnemyIndex].team[1].weapon.name))"
+                + "\n3 \(players[playerEnemyIndex].team[2].characterName) (vie: \(players[playerEnemyIndex].team[2].health), arme: \(players[playerEnemyIndex].team[2].weapon.name))")
+            if let choice = readLine() {
+                switch choice {
+                case "1":
+                    characterTarget = players[playerEnemyIndex].team[0]
+                case "2":
+                    characterTarget = players[playerEnemyIndex].team[1]
+                case "3":
+                    characterTarget = players[playerEnemyIndex].team[2]
+                default:
+                    print("Je ne comprends pas. Veuillez ressayer.")
+                    choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
+                }
             }
         }
     }
@@ -162,9 +184,9 @@ class Game {
     }
     
     // Method which represents a round
-    func round() {
-        choiceFichter()
-        choiceTarget()
+    func round(playerIndex: Int, playerIndexEnemy: Int) {
+        choiceFichter(playerIndex: playerIndex)
+        choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
         attack()
     }
     
@@ -175,7 +197,6 @@ class Game {
         while players.count < 2 {
              createPlayer()
         }
-        round()
         
     }
 }

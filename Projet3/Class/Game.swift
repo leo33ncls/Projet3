@@ -13,6 +13,7 @@ class Game {
     // Properties
     var players = [Player]()
     var nameArray = [String]()
+    var numberOfRounds = 1
     var characterFighter = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     var characterTarget = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     
@@ -214,6 +215,18 @@ class Game {
         }
     }
     
+    // Method which gives de final statistics
+    func finalInformation() {
+        if isTeamAlive(indexPlayer: 0) == true {
+            print("\(players[0].name) a gagné !")
+        } else {
+            print("\(players[1].name) a gagné !")
+        }
+        print("Statistiques finales: "
+            + " Nombre de round: \(numberOfRounds)")
+        teamInformation(playerIndex: 0)
+        teamInformation(playerIndex: 1)
+    }
     
     
     // The logic of the game
@@ -221,6 +234,17 @@ class Game {
         while players.count < 2 {
              createPlayer()
         }
-        
+        teamInformation(playerIndex: 0)
+        teamInformation(playerIndex: 1)
+        while isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
+            round(playerIndex: 0, playerIndexEnemy: 1)
+            numberOfRounds += 1
+            if isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
+                round(playerIndex: 1, playerIndexEnemy: 0)
+                numberOfRounds += 1
+            }
+        }
+        print("La partie est finie !")
+        finalInformation()
     }
 }

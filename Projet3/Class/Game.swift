@@ -12,17 +12,95 @@ class Game {
     
     // Properties
     var players = [Player]()
+    var nameArray = [String]()
     var characterFighter = Character(characterName: "", type: "", health: 0, weapon: Sword())
     var characterTarget = Character(characterName: "", type: "", health: 0, weapon: Sword())
     
     
     // Methods
     
+    // Method to check if the name is valid
+    func nameChecked(name: String) -> Bool {
+        var isUsed = false
+        if nameArray.count == 0 {
+            nameArray.append(name)
+            isUsed = false
+        } else {
+            for i in 0..<nameArray.count {
+                if name == nameArray[i] {
+                    isUsed = true
+                } else {
+                    isUsed = false
+                }
+            }
+        }
+        return isUsed
+    }
+    
+    // Method to retrieve a name
+    func choiceName() -> String {
+        var name: String
+        if let choice = readLine() {
+            if choice.count >= 2 && nameChecked(name: choice) == false {
+                name = choice
+                nameArray.append(name)
+            } else {
+                print("Nom trop court ou déjà utilisé. Choisissez un nouveau nom.")
+                name = choiceName()
+            }
+        } else {
+            name = "SansNom"
+        }
+        return name
+    }
+    
+    // Method retrieving the player's name
+    func playerName(player: Player) {
+        print("Quel est votre nom ?")
+        player.name = choiceName()
+    }
+    
+    // Method allowing to create a team of 3 characters with their name
+    func choiceTeam(player: Player) {
+        while player.team.count < 3 {
+            print("Choisissez un personnage"
+                + " \n1 Le combattant"
+                + " \n2 Le mage"
+                + " \n3 Le colosse"
+                + " \n4 Le nain"
+                + " \n5 L'archer"
+                + " \n6 Le sorcier")
+            if let choice = readLine() {
+                switch choice {
+                case "1":
+                    print("Quel est le nom de votre combattant ?")
+                    let name = choiceName()
+                    player.team.append(Warrior(characterName: name))
+                case "2":
+                    print("Quel est le nom de votre mage ?")
+                    let name = choiceName()
+                    player.team.append(Magus(characterName: name))
+                case "3":
+                    print("Quel est le nom de votre colosse ?")
+                    let name = choiceName()
+                    player.team.append(Colossus(characterName: name))
+                case "4":
+                    print("Quel est le nom de votre nain ?")
+                    let name = choiceName()
+                    player.team.append(Dwarf(characterName: name))
+                default:
+                    print("Je n'ai pas compris")
+                }
+            }
+        }
+        print("Votre équipe est complète, \(player.name). \n")
+    }
+    
     // Method creating a player
     func createPlayer() {
         let player = Player()
-        player.playerName()
-        player.choiceTeam()
+        playerName(player: player)
+        choiceTeam(player: player)
         players.append(player)
     }
     

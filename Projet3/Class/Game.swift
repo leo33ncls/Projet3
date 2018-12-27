@@ -14,8 +14,8 @@ class Game {
     var players = [Player]()
     var nameArray = [String]()
     var numberOfRounds = 1
-    var weaponBox = [Axe(), Sword(), Mace()]
-    var magicWeaponBox = [Wand()]
+    var weaponBox = [Axe(), Sword(), Mace(), Trunk(), Lance(), Excalibur()]
+    var magicWeaponBox = [Wand(), Parchment(), MagicStick()]
     var characterFighter = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     var characterTarget = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     

@@ -12,6 +12,6 @@ class Mace: Weapon {
     
     // Initialization
     init() {
-        super.init(name: "Massue", damage: 5)
+        super.init(name: "Massue", damage: 15)
     }
 }

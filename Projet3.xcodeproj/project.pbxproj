@@ -20,6 +20,11 @@
 		28BB317021CAC29B00ECCAC7 /* Axe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB316F21CAC29B00ECCAC7 /* Axe.swift */; };
 		28BB317221CAC53900ECCAC7 /* Mace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB317121CAC53900ECCAC7 /* Mace.swift */; };
 		28BB318E21D3DF2D00ECCAC7 /* Wand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB318D21D3DF2D00ECCAC7 /* Wand.swift */; };
+		28BB321B21D5432A00ECCAC7 /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB321A21D5432A00ECCAC7 /* Trunk.swift */; };
+		28BB321D21D5433A00ECCAC7 /* Lance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB321C21D5433A00ECCAC7 /* Lance.swift */; };
+		28BB321F21D5434C00ECCAC7 /* Excalibur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB321E21D5434C00ECCAC7 /* Excalibur.swift */; };
+		28BB322121D5441300ECCAC7 /* Parchment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322021D5441300ECCAC7 /* Parchment.swift */; };
+		28BB322321D5442300ECCAC7 /* MagicStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322221D5442300ECCAC7 /* MagicStick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +54,11 @@
 		28BB316F21CAC29B00ECCAC7 /* Axe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Axe.swift; sourceTree = "<group>"; };
 		28BB317121CAC53900ECCAC7 /* Mace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mace.swift; sourceTree = "<group>"; };
 		28BB318D21D3DF2D00ECCAC7 /* Wand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wand.swift; sourceTree = "<group>"; };
+		28BB321A21D5432A00ECCAC7 /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
+		28BB321C21D5433A00ECCAC7 /* Lance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lance.swift; sourceTree = "<group>"; };
+		28BB321E21D5434C00ECCAC7 /* Excalibur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Excalibur.swift; sourceTree = "<group>"; };
+		28BB322021D5441300ECCAC7 /* Parchment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parchment.swift; sourceTree = "<group>"; };
+		28BB322221D5442300ECCAC7 /* MagicStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +128,11 @@
 				28BB316F21CAC29B00ECCAC7 /* Axe.swift */,
 				28BB317121CAC53900ECCAC7 /* Mace.swift */,
 				28BB318D21D3DF2D00ECCAC7 /* Wand.swift */,
+				28BB321A21D5432A00ECCAC7 /* Trunk.swift */,
+				28BB321C21D5433A00ECCAC7 /* Lance.swift */,
+				28BB321E21D5434C00ECCAC7 /* Excalibur.swift */,
+				28BB322021D5441300ECCAC7 /* Parchment.swift */,
+				28BB322221D5442300ECCAC7 /* MagicStick.swift */,
 			);
 			path = Weapon;
 			sourceTree = "<group>";
@@ -179,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BB321B21D5432A00ECCAC7 /* Trunk.swift in Sources */,
 				28BB318E21D3DF2D00ECCAC7 /* Wand.swift in Sources */,
 				28BB316221CA8DC000ECCAC7 /* Warrior.swift in Sources */,
 				28BB315F21CA8CF800ECCAC7 /* Weapon.swift in Sources */,
@@ -187,10 +203,14 @@
 				28BB315121CA7C5900ECCAC7 /* main.swift in Sources */,
 				28BB316421CA8DDA00ECCAC7 /* Colossus.swift in Sources */,
 				28BB316E21CAC29000ECCAC7 /* Sword.swift in Sources */,
+				28BB321F21D5434C00ECCAC7 /* Excalibur.swift in Sources */,
+				28BB322321D5442300ECCAC7 /* MagicStick.swift in Sources */,
+				28BB321D21D5433A00ECCAC7 /* Lance.swift in Sources */,
 				28BB316821CA8E1500ECCAC7 /* Magus.swift in Sources */,
 				28BB315B21CA8C7F00ECCAC7 /* Player.swift in Sources */,
 				28BB315821CA8C2A00ECCAC7 /* Game.swift in Sources */,
 				28BB315D21CA8CA900ECCAC7 /* Character.swift in Sources */,
+				28BB322121D5441300ECCAC7 /* Parchment.swift in Sources */,
 				28BB317021CAC29B00ECCAC7 /* Axe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

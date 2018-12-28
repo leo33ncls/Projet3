@@ -48,7 +48,7 @@ class Game {
                 name = choice
                 nameArray.append(name)
             } else {
-                print("Nom trop court ou déjà utilisé. Choisissez un nouveau nom.")
+                print("⚠️ Nom trop court ou déjà utilisé. Choisissez un nouveau nom.")
                 name = choiceName()
             }
         } else {
@@ -134,6 +134,7 @@ class Game {
                 choiceFighter(playerIndex: playerIndex)
             }
         }
+        fighterIsAlive(characterFighter: characterFighter, playerIndex: playerIndex)
     }
     
     // Method allowing to choose an enemy character to attack
@@ -175,20 +176,25 @@ class Game {
                 }
             }
         }
+        targetIsAlive(characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
     }
     
     // Method which check if the characters involved in the fight are dead
-    func areAlive(characterFighter: Character, characterTarget: Character, playerIndex: Int, playerEnemyIndex: Int) {
-        if characterFighter.health > 0 && characterTarget.health > 0 {
-            characterFighter.attack(target: characterTarget)
-        } else if characterFighter.health <= 0 {
+    func fighterIsAlive(characterFighter: Character, playerIndex: Int) {
+        if characterFighter.health <= 0 {
             print("\(characterFighter.characterName) est mort ! Il ne peut pas attaquer ! \n")
             choiceFighter(playerIndex: playerIndex)
-            characterFighter.attack(target: characterTarget)
         } else {
+            print("")
+        }
+    }
+    
+    func targetIsAlive(characterTarget: Character, playerIndex: Int, playerEnemyIndex: Int) {
+        if characterTarget.health <= 0 {
             print("\(characterTarget.characterName) est déjà mort ! Choisissez une autre cible. \n")
-            choiceTarget(playerIndex: playerIndex ,playerEnemyIndex: playerEnemyIndex)
-            characterFighter.attack(target: characterTarget)
+            choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
+        } else {
+            print("")
         }
     }
     
@@ -208,11 +214,11 @@ class Game {
         choiceFighter(playerIndex: playerIndex)
         randomBoxRound()
         choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
-        areAlive(characterFighter: characterFighter, characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
+        characterFighter.attack(target: characterTarget)
         if characterFighter.type == "Mage" {
-            print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)")
+            print("⛑ \(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName) \n")
         } else {
-            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)")
+            print("⚔️ \(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName) \n")
         }
     }
     
@@ -239,7 +245,7 @@ class Game {
             print("Un coffre vient d'apparaitre !")
             randomWeapon()
         } else {
-            print("Aucun coffre à l'horizon")
+            print("Aucun coffre à l'horizon. \n")
         }
     }
     // Method which gives de final statistics

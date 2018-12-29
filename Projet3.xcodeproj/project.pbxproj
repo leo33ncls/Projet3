@@ -27,6 +27,8 @@
 		28BB322321D5442300ECCAC7 /* MagicStick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322221D5442300ECCAC7 /* MagicStick.swift */; };
 		28BB322521D8166B00ECCAC7 /* Bow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322421D8166B00ECCAC7 /* Bow.swift */; };
 		28BB322721D8187900ECCAC7 /* Archer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322621D8187900ECCAC7 /* Archer.swift */; };
+		28BB322921D81CCE00ECCAC7 /* Curse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322821D81CCE00ECCAC7 /* Curse.swift */; };
+		28BB322B21D81D1900ECCAC7 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB322A21D81D1900ECCAC7 /* Wizard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,8 @@
 		28BB322221D5442300ECCAC7 /* MagicStick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStick.swift; sourceTree = "<group>"; };
 		28BB322421D8166B00ECCAC7 /* Bow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bow.swift; sourceTree = "<group>"; };
 		28BB322621D8187900ECCAC7 /* Archer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archer.swift; sourceTree = "<group>"; };
+		28BB322821D81CCE00ECCAC7 /* Curse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curse.swift; sourceTree = "<group>"; };
+		28BB322A21D81D1900ECCAC7 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				28BB316521CA8DFA00ECCAC7 /* Dwarf.swift */,
 				28BB316721CA8E1500ECCAC7 /* Magus.swift */,
 				28BB322621D8187900ECCAC7 /* Archer.swift */,
+				28BB322A21D81D1900ECCAC7 /* Wizard.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				28BB322021D5441300ECCAC7 /* Parchment.swift */,
 				28BB322221D5442300ECCAC7 /* MagicStick.swift */,
 				28BB322421D8166B00ECCAC7 /* Bow.swift */,
+				28BB322821D81CCE00ECCAC7 /* Curse.swift */,
 			);
 			path = Weapon;
 			sourceTree = "<group>";
@@ -200,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BB322B21D81D1900ECCAC7 /* Wizard.swift in Sources */,
 				28BB321B21D5432A00ECCAC7 /* Trunk.swift in Sources */,
 				28BB318E21D3DF2D00ECCAC7 /* Wand.swift in Sources */,
 				28BB322521D8166B00ECCAC7 /* Bow.swift in Sources */,
@@ -219,6 +226,7 @@
 				28BB315821CA8C2A00ECCAC7 /* Game.swift in Sources */,
 				28BB315D21CA8CA900ECCAC7 /* Character.swift in Sources */,
 				28BB322121D5441300ECCAC7 /* Parchment.swift in Sources */,
+				28BB322921D81CCE00ECCAC7 /* Curse.swift in Sources */,
 				28BB317021CAC29B00ECCAC7 /* Axe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

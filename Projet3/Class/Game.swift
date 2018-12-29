@@ -217,9 +217,14 @@ class Game {
         choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
         characterFighter.attack(target: characterTarget)
         if characterFighter.type == "Mage" {
-            print("⛑ \(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName) \n")
+            print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)"
+                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
+        } else if  characterFighter.weapon.name == "arc" {
+            print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName)"
+                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
         } else {
-            print("⚔️ \(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName) \n")
+            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)"
+                +   "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
         }
     }
     

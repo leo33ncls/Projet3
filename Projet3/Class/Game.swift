@@ -226,12 +226,12 @@ class Game {
     // Method which give a random weapon
     func randomWeapon() {
         if characterFighter.type == "Mage" {
-            let randomIndex = Int(arc4random_uniform(UInt32(magicWeaponBox.count - 1)))
+            let randomIndex = Int(arc4random_uniform(UInt32(magicWeaponBox.count)))
             let newWeapon = magicWeaponBox[randomIndex]
             characterFighter.weapon = newWeapon
             print("\(characterFighter.characterName) est maintenant équipé d'un(e) \(newWeapon.name) qui donne \(-(newWeapon.damage)) de vie. \n")
         } else {
-            let randomIndex = Int(arc4random_uniform(UInt32(weaponBox.count - 1)))
+            let randomIndex = Int(arc4random_uniform(UInt32(weaponBox.count)))
             let newWeapon = weaponBox[randomIndex]
             characterFighter.weapon = newWeapon
             print("\(characterFighter.characterName) est maintenant équipé d'un(e) \(newWeapon.name) qui inflige \(newWeapon.damage) de dégâts \n")
@@ -240,8 +240,7 @@ class Game {
     
     // Method to make random the box's appearance
     func randomBoxRound() {
-        let arrayNumber = [1,2,3,4]
-        let randomNumber = Int(arc4random_uniform(UInt32(arrayNumber.count)))
+        let randomNumber = Int(arc4random_uniform(UInt32(5)))
         if randomNumber == 1 {
             print("Un coffre vient d'apparaitre !")
             randomWeapon()

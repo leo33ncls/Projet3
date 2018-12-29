@@ -12,6 +12,6 @@ class Axe: Weapon {
     
     // Initialization
     init() {
-        super.init(name: "Hache", damage: 20)
+        super.init(name: "hache", damage: 20)
     }
 }

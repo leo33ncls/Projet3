@@ -12,6 +12,6 @@ class Sword: Weapon {
     
     // Initialization
     init() {
-        super.init(name: "Épée", damage: 10)
+        super.init(name: "épée", damage: 10)
     }
 }

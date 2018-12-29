@@ -33,12 +33,13 @@ class Game {
                 if name == nameArray[i] {
                     isUsed = true
                 } else {
-                    isUsed = false
+                    continue
                 }
             }
         }
         return isUsed
     }
+    
     
     // Method to retrieve a name
     func choiceName() -> String {
@@ -90,7 +91,7 @@ class Game {
                     let name = choiceName()
                     player.team.append(Dwarf(characterName: name))
                 default:
-                    print("Je n'ai pas compris")
+                    print("Je n'ai pas compris. \n")
                 }
             }
         }
@@ -130,7 +131,7 @@ class Game {
             case "3":
                 characterFighter = players[playerIndex].team[2]
             default:
-                print("Je ne comprends pas. Veuillez réassayer.")
+                print("Je ne comprends pas. Veuillez réassayer. \n")
                 choiceFighter(playerIndex: playerIndex)
             }
         }
@@ -153,7 +154,7 @@ class Game {
                 case "3":
                     characterTarget = players[playerIndex].team[2]
                 default:
-                    print("Je ne comprends pas. Veuillez ressayer.")
+                    print("Je ne comprends pas. Veuillez ressayer. \n")
                     choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
                 }
             }
@@ -171,7 +172,7 @@ class Game {
                 case "3":
                     characterTarget = players[playerEnemyIndex].team[2]
                 default:
-                    print("Je ne comprends pas. Veuillez ressayer.")
+                    print("Je ne comprends pas. Veuillez ressayer. \n")
                     choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
                 }
             }

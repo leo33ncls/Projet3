@@ -36,5 +36,14 @@ class Character {
             target.health -= weapon.damage
         }
     }
+    
+    // Method which checks if the player is alive
+    func IsAlive() -> Bool {
+        if health <= 0 {
+            return false
+        } else {
+            return true
+        }
+    }
 }
 

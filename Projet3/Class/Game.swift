@@ -84,8 +84,7 @@ class Game {
     
     // Method creating a player
     func createPlayer() {
-        let player = Player()
-        playerName(player: player)
+        let player = Player(name: choiceName())
         choiceTeam(player: player)
         players.append(player)
     }
@@ -162,17 +161,6 @@ class Game {
         }
     }
     
-    // Method which check if the team are still alive
-    func isTeamAlive(indexPlayer: Int) -> Bool{
-        var isTeamAlive: Bool
-        if players[indexPlayer].team[0].health == 0 && players[indexPlayer].team[1].health == 0 && players[indexPlayer].team[2].health == 0 {
-            isTeamAlive = false
-        } else {
-            isTeamAlive = true
-        }
-        return isTeamAlive
-    }
-    
     // Method which represents a round
     func round(playerIndex: Int, playerIndexEnemy: Int) {
         choiceFighter(playerIndex: playerIndex)
@@ -194,7 +182,7 @@ class Game {
     
     // Method which gives de final statistics
     func finalInformation() {
-        if isTeamAlive(indexPlayer: 0) {
+        if players[0].isTeamAlive() {
             print("\(players[0].name) a gagné !")
         } else {
             print("\(players[1].name) a gagné !")
@@ -213,10 +201,10 @@ class Game {
         }
         teamInformation(playerIndex: 0)
         teamInformation(playerIndex: 1)
-        while isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
+        while players[0].isTeamAlive() && players[1].isTeamAlive() {
             round(playerIndex: 0, playerIndexEnemy: 1)
             numberOfRounds += 1
-            if isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
+            if players[0].isTeamAlive() && players[1].isTeamAlive() {
                 round(playerIndex: 1, playerIndexEnemy: 0)
                 numberOfRounds += 1
             }

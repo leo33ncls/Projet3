@@ -11,8 +11,22 @@ import Foundation
 class Player {
     
     // Properties
-    var name = ""
+    var name: String
     var team = [Character]()
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    // Method which checks if the team are still alive
+    func isTeamAlive() -> Bool{
+        for character in team {
+            if character.IsAlive() {
+                return true
+            }
+        }
+        return false
+    }
     
 }
 

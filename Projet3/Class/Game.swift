@@ -14,12 +14,9 @@ class Game {
     var players = [Player]()
     var numberOfRounds = 1
     var nameManager = NameManager()
-    var characterFighter = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
-    var characterTarget = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     
     
     // Methods
-    
     
     // Method to retrieve a name
     func choiceName() -> String {
@@ -39,58 +36,53 @@ class Game {
     }
     
     // Method allowing to create a team of 3 characters with their name
-    func choiceTeam(player: Player) {
-        while player.team.count < 3 {
-            print("Choisissez un personnage"
-                + " \n1 Le combattant"
-                + " \n2 Le mage"
-                + " \n3 Le colosse"
-                + " \n4 Le nain"
-                + " \n5 L'archer"
-                + " \n6 Le sorcier")
-            if let choice = readLine() {
-                switch choice {
-                case "1":
-                    print("Quel est le nom de votre combattant ?")
-                    let name = choiceName()
-                    player.team.append(Warrior(characterName: name))
-                case "2":
-                    print("Quel est le nom de votre mage ?")
-                    let name = choiceName()
-                    player.team.append(Magus(characterName: name))
-                case "3":
-                    print("Quel est le nom de votre colosse ?")
-                    let name = choiceName()
-                    player.team.append(Colossus(characterName: name))
-                case "4":
-                    print("Quel est le nom de votre nain ?")
-                    let name = choiceName()
-                    player.team.append(Dwarf(characterName: name))
-                case "5":
-                    print("Quel est le nom de votre archer ?")
-                    let name = choiceName()
-                    player.team.append(Archer(characterName: name))
-                case "6":
-                    print("Quel est le nom de votre sorcier ?")
-                    let name = choiceName()
-                    player.team.append(Wizard(characterName: name))
-                default:
-                    print("Je n'ai pas compris. \n")
-                }
+    func createCharacter(player: Player) {
+        print("Choisissez un personnage"
+            + " \n1 Le combattant"
+            + " \n2 Le mage"
+            + " \n3 Le colosse"
+            + " \n4 Le nain"
+            + " \n5 L'archer")
+        if let choice = readLine() {
+            switch choice {
+            case "1":
+                print("Quel est le nom de votre combattant ?")
+                let name = choiceName()
+                player.team.append(Warrior(characterName: name))
+            case "2":
+                print("Quel est le nom de votre mage ?")
+                let name = choiceName()
+                player.team.append(Magus(characterName: name))
+            case "3":
+                print("Quel est le nom de votre colosse ?")
+                let name = choiceName()
+                player.team.append(Colossus(characterName: name))
+            case "4":
+                print("Quel est le nom de votre nain ?")
+                let name = choiceName()
+                player.team.append(Dwarf(characterName: name))
+            case "5":
+                print("Quel est le nom de votre archer ?")
+                let name = choiceName()
+                player.team.append(Archer(characterName: name))
+            default:
+                print("Je n'ai pas compris. \n")
             }
         }
-        print("Votre équipe est complète, \(player.name). \n")
     }
     
-    // Method creating a player
+    // Method which creates a player
     func createPlayer() {
         print("Quel est votre nom ?")
         let player = Player(name: choiceName())
-        choiceTeam(player: player)
+        while player.team.count < 3 {
+            createCharacter(player: player)
+        }
+        print("Votre équipe est complète, \(player.name). \n")
         players.append(player)
     }
     
-    // Method wich displays the team's information
+    // Method which displays the team's information
     func teamInformation(playerIndex: Int) {
         print("Joueur: \(players[playerIndex].name)"
             + " \nL'équipe se compose de:")

@@ -10,7 +10,6 @@ import Foundation
 
 class Bow: Weapon {
     
-    
     init() {
         super.init(name: "arc", damage: 5)
     }

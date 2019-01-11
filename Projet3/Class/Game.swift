@@ -12,8 +12,8 @@ class Game {
     
     // Properties
     var players = [Player]()
-    var nameArray = [String]()
     var numberOfRounds = 1
+    var nameManager = NameManager()
     var cursedCharacters = [Character]()
     var weaponBox = [Axe(), Sword(), Mace(), Trunk(), Lance(), Excalibur()]
     var magicWeaponBox = [Wand(), Parchment(), MagicStick()]
@@ -23,30 +23,20 @@ class Game {
     
     // Methods
     
-    // Method to check if the name is valid
-    func isNameValid(name: String) -> Bool {
-        if name.count < 2 && nameArray.contains(name) {
-            return false
-        } else {
-            nameArray.append(name)
-            return true
-        }
-    }
-    
     
     // Method to retrieve a name
     func choiceName() -> String {
         var name: String
         if let choice = readLine() {
-            if isNameValid(name: choice) {
+            if nameManager.isNameValid(name: choice) {
                 name = choice
-                nameArray.append(name)
+                nameManager.nameArray.append(name)
             } else {
                 print("⚠️ Nom trop court ou déjà utilisé. Choisissez un nouveau nom.")
-                name = choiceName()
+                return choiceName()
             }
         } else {
-            name = "SansNom"
+            return choiceName()
         }
         return name
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2805F91721E91EDF009D3135 /* NameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F91621E91EDF009D3135 /* NameManager.swift */; };
 		28BB315121CA7C5900ECCAC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315021CA7C5900ECCAC7 /* main.swift */; };
 		28BB315821CA8C2A00ECCAC7 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315721CA8C2A00ECCAC7 /* Game.swift */; };
 		28BB315B21CA8C7F00ECCAC7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315A21CA8C7F00ECCAC7 /* Player.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2805F91621E91EDF009D3135 /* NameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameManager.swift; sourceTree = "<group>"; };
 		28BB314D21CA7C5900ECCAC7 /* Projet3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Projet3; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BB315021CA7C5900ECCAC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		28BB315721CA8C2A00ECCAC7 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				28BB316C21CAC24E00ECCAC7 /* Weapon */,
 				28BB315C21CA8CA900ECCAC7 /* Character.swift */,
 				28BB316021CA8D9E00ECCAC7 /* Character */,
+				2805F91621E91EDF009D3135 /* NameManager.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				28BB315121CA7C5900ECCAC7 /* main.swift in Sources */,
 				28BB316421CA8DDA00ECCAC7 /* Colossus.swift in Sources */,
 				28BB316E21CAC29000ECCAC7 /* Sword.swift in Sources */,
+				2805F91721E91EDF009D3135 /* NameManager.swift in Sources */,
 				28BB321F21D5434C00ECCAC7 /* Excalibur.swift in Sources */,
 				28BB322321D5442300ECCAC7 /* MagicStick.swift in Sources */,
 				28BB321D21D5433A00ECCAC7 /* Lance.swift in Sources */,

@@ -24,21 +24,13 @@ class Game {
     // Methods
     
     // Method to check if the name is valid
-    func nameChecked(name: String) -> Bool {
-        var isUsed = false
-        if nameArray.count == 0 {
-            nameArray.append(name)
-            isUsed = false
+    func isNameValid(name: String) -> Bool {
+        if name.count < 2 && nameArray.contains(name) {
+            return false
         } else {
-            for i in 0..<nameArray.count {
-                if name == nameArray[i] {
-                    isUsed = true
-                } else {
-                    continue
-                }
-            }
+            nameArray.append(name)
+            return true
         }
-        return isUsed
     }
     
     
@@ -46,7 +38,7 @@ class Game {
     func choiceName() -> String {
         var name: String
         if let choice = readLine() {
-            if choice.count >= 2 && nameChecked(name: choice) == false {
+            if isNameValid(name: choice) {
                 name = choice
                 nameArray.append(name)
             } else {
@@ -191,7 +183,7 @@ class Game {
         targetIsAlive(characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
     }
     
-    // Method which check if the characters involved in the fight are dead
+    // Method which check if the character involved in the fight is alive
     func fighterIsAlive(characterFighter: Character, playerIndex: Int) {
         if characterFighter.health <= 0 {
             print("\(characterFighter.characterName) est mort ! Il ne peut pas attaquer ! \n")
@@ -201,6 +193,7 @@ class Game {
         }
     }
     
+    // Method which check if the target is alive
     func targetIsAlive(characterTarget: Character, playerIndex: Int, playerEnemyIndex: Int) {
         if characterTarget.health <= 0 {
             print("\(characterTarget.characterName) est déjà mort ! Choisissez une autre cible. \n")
@@ -244,6 +237,7 @@ class Game {
         }
     }
     
+    // Method which remove 1 for every characters in the array cursedCharacters
     func curse() {
         for character in cursedCharacters {
             character.health -= 1
@@ -252,8 +246,8 @@ class Game {
     
     // Method which give a random weapon
     func randomWeapon() {
-        if characterFighter.type == "Mage" || characterFighter.type == "Sorcier" {
-            let randomIndex = Int(arc4random_uniform(UInt32(magicWeaponBox.count)))
+        if characterFighter is Magus || characterFighter is Wizard {
+            let randomIndex = Int.random(in: 0...magicWeaponBox.count - 1)
             let newWeapon = magicWeaponBox[randomIndex]
             characterFighter.weapon = newWeapon
             print("\(characterFighter.characterName) est maintenant équipé d'un(e) \(newWeapon.name) qui donne \(-(newWeapon.damage)) de vie. \n")
@@ -277,7 +271,7 @@ class Game {
     }
     // Method which gives de final statistics
     func finalInformation() {
-        if isTeamAlive(indexPlayer: 0) == true {
+        if isTeamAlive(indexPlayer: 0) {
             print("\(players[0].name) a gagné !")
         } else {
             print("\(players[1].name) a gagné !")

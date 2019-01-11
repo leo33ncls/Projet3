@@ -26,6 +26,7 @@ class Character {
         self.weapon = weapon
     }
     
+    // Method which make the character's attacks
     func attack(target: Character) {
         if target.health < weapon.damage {
             target.health = 0

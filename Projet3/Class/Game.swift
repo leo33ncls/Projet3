@@ -51,12 +51,6 @@ class Game {
         return name
     }
     
-    // Method retrieving the player's name
-    func playerName(player: Player) {
-        print("Quel est votre nom ?")
-        player.name = choiceName()
-    }
-    
     // Method allowing to create a team of 3 characters with their name
     func choiceTeam(player: Player) {
         while player.team.count < 3 {
@@ -183,26 +177,6 @@ class Game {
         targetIsAlive(characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
     }
     
-    // Method which check if the character involved in the fight is alive
-    func fighterIsAlive(characterFighter: Character, playerIndex: Int) {
-        if characterFighter.health <= 0 {
-            print("\(characterFighter.characterName) est mort ! Il ne peut pas attaquer ! \n")
-            choiceFighter(playerIndex: playerIndex)
-        } else {
-            print("")
-        }
-    }
-    
-    // Method which check if the target is alive
-    func targetIsAlive(characterTarget: Character, playerIndex: Int, playerEnemyIndex: Int) {
-        if characterTarget.health <= 0 {
-            print("\(characterTarget.characterName) est déjà mort ! Choisissez une autre cible. \n")
-            choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
-        } else {
-            print("")
-        }
-    }
-    
     // Method which check if the team are still alive
     func isTeamAlive(indexPlayer: Int) -> Bool{
         var isTeamAlive: Bool
@@ -237,12 +211,6 @@ class Game {
         }
     }
     
-    // Method which remove 1 for every characters in the array cursedCharacters
-    func curse() {
-        for character in cursedCharacters {
-            character.health -= 1
-        }
-    }
     
     // Method which give a random weapon
     func randomWeapon() {

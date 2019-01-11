@@ -114,12 +114,10 @@
 			children = (
 				28BB315721CA8C2A00ECCAC7 /* Game.swift */,
 				28BB315A21CA8C7F00ECCAC7 /* Player.swift */,
-				28BB315E21CA8CF800ECCAC7 /* Weapon.swift */,
-				28BB316C21CAC24E00ECCAC7 /* Weapon */,
-				28BB315C21CA8CA900ECCAC7 /* Character.swift */,
-				28BB316021CA8D9E00ECCAC7 /* Character */,
 				2805F91621E91EDF009D3135 /* NameManager.swift */,
 				2805F91821E92059009D3135 /* Chest.swift */,
+				28BB316C21CAC24E00ECCAC7 /* Weapon */,
+				28BB316021CA8D9E00ECCAC7 /* Character */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -127,6 +125,7 @@
 		28BB316021CA8D9E00ECCAC7 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				28BB315C21CA8CA900ECCAC7 /* Character.swift */,
 				28BB316121CA8DC000ECCAC7 /* Warrior.swift */,
 				28BB316321CA8DDA00ECCAC7 /* Colossus.swift */,
 				28BB316521CA8DFA00ECCAC7 /* Dwarf.swift */,
@@ -140,6 +139,7 @@
 		28BB316C21CAC24E00ECCAC7 /* Weapon */ = {
 			isa = PBXGroup;
 			children = (
+				28BB315E21CA8CF800ECCAC7 /* Weapon.swift */,
 				28BB316D21CAC29000ECCAC7 /* Sword.swift */,
 				28BB316F21CAC29B00ECCAC7 /* Axe.swift */,
 				28BB317121CAC53900ECCAC7 /* Mace.swift */,

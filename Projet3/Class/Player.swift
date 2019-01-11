@@ -28,6 +28,19 @@ class Player {
         return false
     }
     
+    // Method which allows to choice a character in your team
+    func choiceCharacter() -> Character {
+        if let choice = readLine() {
+            if let index = Int(choice), team.indices.contains(index - 1) && team[index - 1].IsAlive() {
+                return team[index - 1]
+            } else {
+                print("Mauvais choix. Reesayer")
+                return choiceCharacter()
+            }
+        } else {
+            return choiceCharacter()
+        }
+    }
 }
 
 

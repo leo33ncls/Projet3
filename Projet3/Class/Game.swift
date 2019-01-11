@@ -84,6 +84,7 @@ class Game {
     
     // Method creating a player
     func createPlayer() {
+        print("Quel est votre nom ?")
         let player = Player(name: choiceName())
         choiceTeam(player: player)
         players.append(player)
@@ -99,83 +100,68 @@ class Game {
         print("\n")
     }
     
-    // Method allowing to choose a character of your team who is going to attack the enemy
-    func choiceFighter(playerIndex: Int) {
-        print("\(players[playerIndex].name), quel personnage va attaquer l'ennemie ou soigner un allié ?"
-            + "\n1 \(players[playerIndex].team[0].characterName) (vie: \(players[playerIndex].team[0].health), dégats: \(players[playerIndex].team[0].weapon.damage))"
-            + "\n2 \(players[playerIndex].team[1].characterName) (vie: \(players[playerIndex].team[1].health), dégats: \(players[playerIndex].team[1].weapon.damage))"
-            + "\n3 \(players[playerIndex].team[2].characterName) (vie: \(players[playerIndex].team[2].health), dégats: \(players[playerIndex].team[2].weapon.damage))")
-        if let choice = readLine() {
-            switch choice {
-            case "1":
-                characterFighter = players[playerIndex].team[0]
-            case "2":
-                characterFighter = players[playerIndex].team[1]
-            case "3":
-                characterFighter = players[playerIndex].team[2]
-            default:
-                print("Je ne comprends pas. Veuillez réassayer. \n")
-                choiceFighter(playerIndex: playerIndex)
-            }
-        }
-    }
     
-    // Method allowing to choose an enemy character to attack
-    func choiceTarget(playerIndex: Int, playerEnemyIndex: Int) {
-        if characterFighter.weapon.damage < 0 {
-            print("\(players[playerIndex].name), quel personnage va être soigner ?"
-                + "\n1 \(players[playerIndex].team[0].characterName) (vie: \(players[playerIndex].team[0].health), arme: \(players[playerIndex].team[0].weapon.name))"
-                + "\n2 \(players[playerIndex].team[1].characterName) (vie: \(players[playerIndex].team[1].health), arme: \(players[playerIndex].team[1].weapon.name))"
-                + "\n3 \(players[playerIndex].team[2].characterName) (vie: \(players[playerIndex].team[2].health), arme: \(players[playerIndex].team[2].weapon.name))")
-            if let choice = readLine() {
-                switch choice {
-                case "1":
-                    characterTarget = players[playerIndex].team[0]
-                case "2":
-                    characterTarget = players[playerIndex].team[1]
-                case "3":
-                    characterTarget = players[playerIndex].team[2]
-                default:
-                    print("Je ne comprends pas. Veuillez ressayer. \n")
-                    choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
-                }
-            }
+    // Method to choice a fighter
+    func choiceFighter(playerIndex: Int) -> Character {
+        var characterFighter: Character
+        
+        print("\(players[playerIndex].name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
+        for i in 0..<3 {
+            print("\(i + 1)/ \(players[playerIndex].team[i].characterName)")
+        }
+        characterFighter = players[playerIndex].choiceCharacter()
+        
+        if characterFighter.IsAlive() {
+            Chest().randomBoxRound(character: characterFighter)
+            
         } else {
-            print("\(players[playerIndex].name), quelle est la cible ?"
-                + "\n1 \(players[playerEnemyIndex].team[0].characterName) (vie: \(players[playerEnemyIndex].team[0].health), arme: \(players[playerEnemyIndex].team[0].weapon.name))"
-                + "\n2 \(players[playerEnemyIndex].team[1].characterName) (vie: \(players[playerEnemyIndex].team[1].health), arme: \(players[playerEnemyIndex].team[1].weapon.name))"
-                + "\n3 \(players[playerEnemyIndex].team[2].characterName) (vie: \(players[playerEnemyIndex].team[2].health), arme: \(players[playerEnemyIndex].team[2].weapon.name))")
-            if let choice = readLine() {
-                switch choice {
-                case "1":
-                    characterTarget = players[playerEnemyIndex].team[0]
-                case "2":
-                    characterTarget = players[playerEnemyIndex].team[1]
-                case "3":
-                    characterTarget = players[playerEnemyIndex].team[2]
-                default:
-                    print("Je ne comprends pas. Veuillez ressayer. \n")
-                    choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
-                }
-            }
+            print("\(characterFighter.characterName) est mort ! Choissisez un autre guerrier. \n")
+            characterFighter = choiceFighter(playerIndex: playerIndex)
         }
+        return characterFighter
     }
     
-    // Method which represents a round
+    
+    
+    // Method which reprensents a round
     func round(playerIndex: Int, playerIndexEnemy: Int) {
-        choiceFighter(playerIndex: playerIndex)
-        Chest().randomBoxRound(character: characterFighter)
-        choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
-        characterFighter.attack(target: characterTarget)
-        if characterFighter.type == "Mage" {
-            print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)"
-                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
-        } else if  characterFighter.weapon.name == "arc" {
-            print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName)"
-                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
+        let characterFighter = choiceFighter(playerIndex: playerIndex)
+        var characterTarget: Character
+        
+        if characterFighter is Magus {
+            print("Quel personnage va être soigné ? \n")
+            for i in 0..<3 {
+                print("\(i + 1)/ \(players[playerIndex].team[i].characterName)")
+            }
+            characterTarget = players[playerIndex].choiceCharacter()
+            
+            if characterTarget.IsAlive() {
+                characterFighter.attack(target: characterTarget)
+                
+                print("\(characterFighter.characterName) donne \(characterFighter.weapon.damage) de vie à \(characterTarget.characterName). \n"
+                    + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+                
+            } else {
+                print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
+                characterTarget = players[playerIndex].choiceCharacter()
+            }
+            
         } else {
-            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)"
-                +   "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
+            print("Quel personnage va être attaqué ?")
+            for i in 0..<3 {
+                print("\(i + 1)/ \(players[playerIndexEnemy].team[i].characterName)")
+            }
+            characterTarget = players[playerIndexEnemy].choiceCharacter()
+            
+            if characterTarget.IsAlive() {
+                characterFighter.attack(target: characterTarget)
+                print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName). \n"
+                    + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+                
+            } else {
+                print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
+                characterTarget = players[playerIndexEnemy].choiceCharacter()
+            }
         }
     }
     

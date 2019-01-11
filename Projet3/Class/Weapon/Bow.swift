@@ -10,13 +10,15 @@ import Foundation
 
 class Bow: Weapon {
     
+    override var damage: Int {
+        get {
+            return Int.random(in: 0...20)
+        }
+        set {}
+    }
+    
     init() {
         super.init(name: "arc", damage: 5)
     }
     
-    
-    func randomDamage() -> Int{
-        let randomDamage = Int(arc4random_uniform(UInt32(21)))
-        return randomDamage
-    }
 }

@@ -14,9 +14,6 @@ class Game {
     var players = [Player]()
     var numberOfRounds = 1
     var nameManager = NameManager()
-    var cursedCharacters = [Character]()
-    var weaponBox = [Axe(), Sword(), Mace(), Trunk(), Lance(), Excalibur()]
-    var magicWeaponBox = [Wand(), Parchment(), MagicStick()]
     var characterFighter = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     var characterTarget = Character(characterName: "", type: "", health: 0, healthMax: 0, weapon: Sword())
     
@@ -122,7 +119,6 @@ class Game {
                 choiceFighter(playerIndex: playerIndex)
             }
         }
-        fighterIsAlive(characterFighter: characterFighter, playerIndex: playerIndex)
     }
     
     // Method allowing to choose an enemy character to attack
@@ -164,7 +160,6 @@ class Game {
                 }
             }
         }
-        targetIsAlive(characterTarget: characterTarget, playerIndex: playerIndex, playerEnemyIndex: playerEnemyIndex)
     }
     
     // Method which check if the team are still alive
@@ -181,52 +176,22 @@ class Game {
     // Method which represents a round
     func round(playerIndex: Int, playerIndexEnemy: Int) {
         choiceFighter(playerIndex: playerIndex)
-        randomBoxRound()
+        Chest().randomBoxRound(character: characterFighter)
         choiceTarget(playerIndex: playerIndex, playerEnemyIndex: playerIndexEnemy)
         characterFighter.attack(target: characterTarget)
-        if characterFighter.weapon.name == "malédiction" {
-            cursedCharacters.append(characterTarget)
-            print("\(characterFighter.characterName) lance une malédiction sur \(characterTarget.characterName) \n")
+        if characterFighter.type == "Mage" {
+            print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)"
+                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
+        } else if  characterFighter.weapon.name == "arc" {
+            print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName)"
+                + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
         } else {
-            if characterFighter.type == "Mage" {
-                print("\(characterFighter.characterName) donne \(-(characterFighter.weapon.damage)) points de vie à \(characterTarget.characterName)"
-                    + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
-            } else if  characterFighter.weapon.name == "arc" {
-                print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName)"
-                    + "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
-            } else {
-                print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)"
-                    +   "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
-            }
+            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) points de vie à \(characterTarget.characterName)"
+                +   "\n\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
         }
     }
     
     
-    // Method which give a random weapon
-    func randomWeapon() {
-        if characterFighter is Magus || characterFighter is Wizard {
-            let randomIndex = Int.random(in: 0...magicWeaponBox.count - 1)
-            let newWeapon = magicWeaponBox[randomIndex]
-            characterFighter.weapon = newWeapon
-            print("\(characterFighter.characterName) est maintenant équipé d'un(e) \(newWeapon.name) qui donne \(-(newWeapon.damage)) de vie. \n")
-        } else {
-            let randomIndex = Int(arc4random_uniform(UInt32(weaponBox.count)))
-            let newWeapon = weaponBox[randomIndex]
-            characterFighter.weapon = newWeapon
-            print("\(characterFighter.characterName) est maintenant équipé d'un(e) \(newWeapon.name) qui inflige \(newWeapon.damage) de dégâts \n")
-        }
-    }
-    
-    // Method to make random the box's appearance
-    func randomBoxRound() {
-        let randomNumber = Int(arc4random_uniform(UInt32(5)))
-        if randomNumber == 1 {
-            print("Un coffre vient d'apparaitre !")
-            randomWeapon()
-        } else {
-            print("Aucun coffre à l'horizon. \n")
-        }
-    }
     // Method which gives de final statistics
     func finalInformation() {
         if isTeamAlive(indexPlayer: 0) {
@@ -251,11 +216,9 @@ class Game {
         while isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
             round(playerIndex: 0, playerIndexEnemy: 1)
             numberOfRounds += 1
-            curse()
             if isTeamAlive(indexPlayer: 0) == true && isTeamAlive(indexPlayer: 1) == true {
                 round(playerIndex: 1, playerIndexEnemy: 0)
                 numberOfRounds += 1
-                curse()
             }
         }
         print("La partie est finie !")

@@ -47,24 +47,19 @@ class Game {
             switch choice {
             case "1":
                 print("Quel est le nom de votre combattant ?")
-                let name = choiceName()
-                player.team.append(Warrior(characterName: name))
+                player.team.append(Warrior(characterName: choiceName()))
             case "2":
                 print("Quel est le nom de votre mage ?")
-                let name = choiceName()
-                player.team.append(Magus(characterName: name))
+                player.team.append(Magus(characterName: choiceName()))
             case "3":
                 print("Quel est le nom de votre colosse ?")
-                let name = choiceName()
-                player.team.append(Colossus(characterName: name))
+                player.team.append(Colossus(characterName: choiceName()))
             case "4":
                 print("Quel est le nom de votre nain ?")
-                let name = choiceName()
-                player.team.append(Dwarf(characterName: name))
+                player.team.append(Dwarf(characterName: choiceName()))
             case "5":
                 print("Quel est le nom de votre archer ?")
-                let name = choiceName()
-                player.team.append(Archer(characterName: name))
+                player.team.append(Archer(characterName: choiceName()))
             default:
                 print("Je n'ai pas compris. \n")
             }
@@ -83,32 +78,48 @@ class Game {
     }
     
     // Method which displays the team's information
-    func teamInformation(playerIndex: Int) {
-        print("Joueur: \(players[playerIndex].name)"
+    func teamInformation(player: Player) {
+        print("Joueur: \(player.name)"
             + " \nL'équipe se compose de:")
         for i in 0...2 {
-            print("Un \(players[playerIndex].team[i].type) nommé \(players[playerIndex].team[i].characterName) armé \(players[playerIndex].team[i].weapon.name) ayant \(players[playerIndex].team[i].health) points de vie.")
+            print("Un \(player.team[i].type) nommé \(player.team[i].characterName) armé \(player.team[i].weapon.name) ayant \(player.team[i].health) points de vie.")
         }
         print("\n")
     }
     
+    // Method which allows to choice a character in your team
+    func choiceCharacter(player: Player) -> Character {
+        if let choice = readLine() {
+            if let index = Int(choice), player.team.indices.contains(index - 1) && player.team[index - 1].IsAlive() {
+                return player.team[index - 1]
+            } else if let index = Int(choice), player.team.indices.contains(index - 1) && !player.team[index - 1].IsAlive() {
+                print("\(player.team[index - 1].characterName) est mort ! Choissisez un autre personnage.")
+                return choiceCharacter(player: player)
+            } else {
+                print("Choix non-valide. Réessayez.")
+                return choiceCharacter(player: player)
+            }
+        } else {
+            return choiceCharacter(player: player)
+        }
+    }
     
     // Method to choice a fighter
-    func choiceFighter(playerIndex: Int) -> Character {
+    func choiceFighter(player: Player) -> Character {
         var characterFighter: Character
         
-        print("\(players[playerIndex].name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
+        print("\(player.name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
         for i in 0..<3 {
-            print("\(i + 1)/ \(players[playerIndex].team[i].characterName)")
+            print("\(i + 1)/ \(player.team[i].characterName)")
         }
-        characterFighter = players[playerIndex].choiceCharacter()
+        characterFighter = choiceCharacter(player: player)
         
         if characterFighter.IsAlive() {
             Chest().randomBoxRound(character: characterFighter)
             
         } else {
             print("\(characterFighter.characterName) est mort ! Choissisez un autre guerrier. \n")
-            characterFighter = choiceFighter(playerIndex: playerIndex)
+            characterFighter = choiceFighter(player: player)
         }
         return characterFighter
     }
@@ -116,16 +127,16 @@ class Game {
     
     
     // Method which reprensents a round
-    func round(playerIndex: Int, playerIndexEnemy: Int) {
-        let characterFighter = choiceFighter(playerIndex: playerIndex)
+    func round(player: Player, playerEnemy: Player) {
+        let characterFighter = choiceFighter(player: player)
         var characterTarget: Character
         
         if characterFighter is Magus {
             print("Quel personnage va être soigné ? \n")
             for i in 0..<3 {
-                print("\(i + 1)/ \(players[playerIndex].team[i].characterName)")
+                print("\(i + 1)/ \(player.team[i].characterName)")
             }
-            characterTarget = players[playerIndex].choiceCharacter()
+            characterTarget = player.choiceCharacter()
             
             if characterTarget.IsAlive() {
                 characterFighter.attack(target: characterTarget)
@@ -135,15 +146,15 @@ class Game {
                 
             } else {
                 print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
-                characterTarget = players[playerIndex].choiceCharacter()
+                characterTarget = player.choiceCharacter()
             }
             
         } else {
             print("Quel personnage va être attaqué ?")
             for i in 0..<3 {
-                print("\(i + 1)/ \(players[playerIndexEnemy].team[i].characterName)")
+                print("\(i + 1)/ \(playerEnemy.team[i].characterName)")
             }
-            characterTarget = players[playerIndexEnemy].choiceCharacter()
+            characterTarget = playerEnemy.choiceCharacter()
             
             if characterTarget.IsAlive() {
                 characterFighter.attack(target: characterTarget)
@@ -152,7 +163,7 @@ class Game {
                 
             } else {
                 print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
-                characterTarget = players[playerIndexEnemy].choiceCharacter()
+                characterTarget = choiceCharacter(player: playerEnemy)
             }
         }
     }
@@ -167,8 +178,8 @@ class Game {
         }
         print("Statistiques finales: "
             + " Nombre de round: \(numberOfRounds)")
-        teamInformation(playerIndex: 0)
-        teamInformation(playerIndex: 1)
+        teamInformation(player: players[0])
+        teamInformation(player: players[1])
     }
     
     
@@ -177,13 +188,13 @@ class Game {
         while players.count < 2 {
              createPlayer()
         }
-        teamInformation(playerIndex: 0)
-        teamInformation(playerIndex: 1)
+        teamInformation(player: players[0])
+        teamInformation(player: players[1])
         while players[0].isTeamAlive() && players[1].isTeamAlive() {
-            round(playerIndex: 0, playerIndexEnemy: 1)
+            round(player: players[0], playerEnemy: players[1])
             numberOfRounds += 1
             if players[0].isTeamAlive() && players[1].isTeamAlive() {
-                round(playerIndex: 1, playerIndexEnemy: 0)
+                round(player: players[1], playerEnemy: players[0])
                 numberOfRounds += 1
             }
         }

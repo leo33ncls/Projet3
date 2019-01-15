@@ -17,7 +17,6 @@ class NameManager {
         if name.count < 2 && nameArray.contains(name) {
             return false
         } else {
-            nameArray.append(name)
             return true
         }
     }

@@ -11,6 +11,6 @@ import Foundation
 class Wizard: Character {
     
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Sorcier", health: 70, healthMax: 70, weapon: Curse())
+        super.init(characterName: characterName, type: "Sorcier", health: 60, healthMax: 60, weapon: Curse())
     }
 }

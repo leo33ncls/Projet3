@@ -89,6 +89,11 @@ class Game {
     
     // Method which allows to choice a character in your team
     func choiceCharacter(player: Player) -> Character {
+        
+        for i in 0..<3 {
+            print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), arme: \(player.team[i].weapon.name))")
+        }
+        
         if let choice = readLine() {
             if let index = Int(choice), player.team.indices.contains(index - 1) && player.team[index - 1].isAlive() {
                 return player.team[index - 1]
@@ -103,70 +108,46 @@ class Game {
             return choiceCharacter(player: player)
         }
     }
-    
-    // Method to choice a fighter
-    func choiceFighter(player: Player) -> Character {
-        var characterFighter: Character
-        
-        print("\(player.name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
-        for i in 0..<3 {
-            print("\(i + 1)/ \(player.team[i].characterName)")
-        }
-        characterFighter = choiceCharacter(player: player)
-        
-        if characterFighter.isAlive() {
-            Chest().randomBoxRound(character: characterFighter)
-            
-        } else {
-            print("\(characterFighter.characterName) est mort ! Choissisez un autre guerrier. \n")
-            characterFighter = choiceFighter(player: player)
-        }
-        return characterFighter
-    }
-    
-    
+
     
     // Method which reprensents a round
     func round(player: Player, playerEnemy: Player) {
-        let characterFighter = choiceFighter(player: player)
+        var characterFighter: Character
         var characterTarget: Character
         
+        print("\(player.name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
+        characterFighter = choiceCharacter(player: player)
+        
+        Chest().randomBoxRound(character: characterFighter)
+        
         if characterFighter is Magus {
-            print("Quel personnage va être soigné ? \n")
-            for i in 0..<3 {
-                print("\(i + 1)/ \(player.team[i].characterName)")
-            }
+            print("Quel personnage va être soigné ?")
             characterTarget = choiceCharacter(player: player)
-            
-            if characterTarget.isAlive() {
-                characterFighter.attack(target: characterTarget)
-                
-                print("\(characterFighter.characterName) donne \(characterFighter.weapon.damage) de vie à \(characterTarget.characterName). \n"
-                    + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
-                
-            } else {
-                print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
-                characterTarget = choiceCharacter(player: player)
-            }
-            
         } else {
             print("Quel personnage va être attaqué ?")
-            for i in 0..<3 {
-                print("\(i + 1)/ \(playerEnemy.team[i].characterName)")
-            }
             characterTarget = choiceCharacter(player: playerEnemy)
-            
-            if characterTarget.isAlive() {
-                characterFighter.attack(target: characterTarget)
-                print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName). \n"
-                    + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
-                
-            } else {
-                print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
-                characterTarget = choiceCharacter(player: playerEnemy)
-            }
+        }
+        
+        characterFighter.attack(target: characterTarget)
+        
+        roundInformation(characterFighter: characterFighter, characterTarget: characterTarget)
+    }
+    
+    
+    func roundInformation(characterFighter: Character, characterTarget: Character) {
+        
+        if characterFighter is Magus {
+            print("\(characterFighter.characterName) donne \(-characterFighter.weapon.damage) de vie à \(characterTarget.characterName). \n"
+                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+        } else if characterFighter is Archer {
+            print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName). \n"
+                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+        } else {
+            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName). \n"
+                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
         }
     }
+    
     
     
     // Method which gives de final statistics

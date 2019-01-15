@@ -90,9 +90,9 @@ class Game {
     // Method which allows to choice a character in your team
     func choiceCharacter(player: Player) -> Character {
         if let choice = readLine() {
-            if let index = Int(choice), player.team.indices.contains(index - 1) && player.team[index - 1].IsAlive() {
+            if let index = Int(choice), player.team.indices.contains(index - 1) && player.team[index - 1].isAlive() {
                 return player.team[index - 1]
-            } else if let index = Int(choice), player.team.indices.contains(index - 1) && !player.team[index - 1].IsAlive() {
+            } else if let index = Int(choice), player.team.indices.contains(index - 1) && !player.team[index - 1].isAlive() {
                 print("\(player.team[index - 1].characterName) est mort ! Choissisez un autre personnage.")
                 return choiceCharacter(player: player)
             } else {
@@ -114,7 +114,7 @@ class Game {
         }
         characterFighter = choiceCharacter(player: player)
         
-        if characterFighter.IsAlive() {
+        if characterFighter.isAlive() {
             Chest().randomBoxRound(character: characterFighter)
             
         } else {
@@ -136,9 +136,9 @@ class Game {
             for i in 0..<3 {
                 print("\(i + 1)/ \(player.team[i].characterName)")
             }
-            characterTarget = player.choiceCharacter()
+            characterTarget = choiceCharacter(player: player)
             
-            if characterTarget.IsAlive() {
+            if characterTarget.isAlive() {
                 characterFighter.attack(target: characterTarget)
                 
                 print("\(characterFighter.characterName) donne \(characterFighter.weapon.damage) de vie à \(characterTarget.characterName). \n"
@@ -146,7 +146,7 @@ class Game {
                 
             } else {
                 print("\(characterTarget.characterName) est déjà mort ! Choissisez une autre cible. \n")
-                characterTarget = player.choiceCharacter()
+                characterTarget = choiceCharacter(player: player)
             }
             
         } else {
@@ -154,9 +154,9 @@ class Game {
             for i in 0..<3 {
                 print("\(i + 1)/ \(playerEnemy.team[i].characterName)")
             }
-            characterTarget = playerEnemy.choiceCharacter()
+            characterTarget = choiceCharacter(player: playerEnemy)
             
-            if characterTarget.IsAlive() {
+            if characterTarget.isAlive() {
                 characterFighter.attack(target: characterTarget)
                 print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName). \n"
                     + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )

@@ -14,7 +14,7 @@ class NameManager {
     
     // Method to check if the name is valid
     func isNameValid(name: String) -> Bool {
-        if name.count < 2 && nameArray.contains(name) {
+        if name.count < 2 || nameArray.contains(name) {
             return false
         } else {
             return true

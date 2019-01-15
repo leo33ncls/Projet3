@@ -38,7 +38,7 @@ class Character {
     }
     
     // Method which checks if the player is alive
-    func IsAlive() -> Bool {
+    func isAlive() -> Bool {
         if health <= 0 {
             return false
         } else {

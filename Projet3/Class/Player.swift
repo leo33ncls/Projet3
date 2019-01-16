@@ -34,6 +34,7 @@ class Player {
     
     // Method which checks if the team are still alive
     func isTeamAlive() -> Bool{
+        
         for character in team {
             if character.isAlive() {
                 return true

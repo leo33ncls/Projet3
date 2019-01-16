@@ -48,6 +48,7 @@ class Character {
     // Method which make the character's attacks
     func attack(target: Character) -> Int {
         let damage = weapon.damage
+        
         if target.health < damage {
             target.health = 0
         } else if target.healthMax < (target.health - damage) {

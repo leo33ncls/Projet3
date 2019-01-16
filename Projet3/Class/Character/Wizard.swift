@@ -22,6 +22,7 @@ class Wizard: Character {
     //======================
     // Method which make the character's attacks
     override func attack(target: Character) -> Int {
+        
         if target is Magus {
             if  -weapon.damage < target.weapon.damage {
                 target.weapon.damage = 0

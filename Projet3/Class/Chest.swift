@@ -54,6 +54,19 @@ class Chest {
         }
     }
     
+    // Method giving a random curse
+    func curses() -> Weapon {
+        let randomNumber = Int.random(in: 1...3)
+        switch randomNumber {
+        case 1: return Curse()
+        case 2: return WeakCurse()
+        case 3: return StrongCurse()
+        default:
+            return Curse()
+        }
+    }
+    
+    
     // Method that assigns a weapon to a character
     func randomWeapon(character: Character) {
         if character is Magus {
@@ -61,7 +74,7 @@ class Chest {
         } else if character is Archer{
             character.weapon = bows()
         } else if character is Wizard {
-            character.weapon = Curse()
+            character.weapon = curses()
         } else {
             character.weapon = weapon()
         }

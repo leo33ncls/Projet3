@@ -185,7 +185,7 @@ class Game {
     func roundInformation(characterFighter: Character, characterTarget: Character, damage: Int) {
         
         if characterFighter is Wizard {
-            print("\(characterFighter.characterName) lance une malédiction sur \(characterTarget.characterName).")
+            print("\(characterFighter.characterName) lance une \(characterFighter.weapon.name) sur \(characterTarget.characterName).")
             
             if let weapon = characterTarget.weapon as? RangedWeapon {
                 print("L'arc de \(characterTarget.characterName) inflige maintenant un maximum de \(weapon.damageMax) \n")

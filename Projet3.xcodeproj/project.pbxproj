@@ -12,6 +12,8 @@
 		2805F91B21EE7AD2009D3135 /* GoldBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F91A21EE7AD2009D3135 /* GoldBow.swift */; };
 		2805F91D21EE7B88009D3135 /* DamagedBow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F91C21EE7B88009D3135 /* DamagedBow.swift */; };
 		2805F92221EEA7A4009D3135 /* RangedWeapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F92121EEA7A4009D3135 /* RangedWeapon.swift */; };
+		2805F92421EFE6E8009D3135 /* WeakCurse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F92321EFE6E8009D3135 /* WeakCurse.swift */; };
+		2805F92621EFE73A009D3135 /* StrongCurse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2805F92521EFE73A009D3135 /* StrongCurse.swift */; };
 		28BB315121CA7C5900ECCAC7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315021CA7C5900ECCAC7 /* main.swift */; };
 		28BB315821CA8C2A00ECCAC7 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315721CA8C2A00ECCAC7 /* Game.swift */; };
 		28BB315B21CA8C7F00ECCAC7 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB315A21CA8C7F00ECCAC7 /* Player.swift */; };
@@ -54,6 +56,8 @@
 		2805F91A21EE7AD2009D3135 /* GoldBow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldBow.swift; sourceTree = "<group>"; };
 		2805F91C21EE7B88009D3135 /* DamagedBow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamagedBow.swift; sourceTree = "<group>"; };
 		2805F92121EEA7A4009D3135 /* RangedWeapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedWeapon.swift; sourceTree = "<group>"; };
+		2805F92321EFE6E8009D3135 /* WeakCurse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakCurse.swift; sourceTree = "<group>"; };
+		2805F92521EFE73A009D3135 /* StrongCurse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrongCurse.swift; sourceTree = "<group>"; };
 		28BB314D21CA7C5900ECCAC7 /* Projet3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Projet3; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BB315021CA7C5900ECCAC7 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		28BB315721CA8C2A00ECCAC7 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -94,9 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				2805F92121EEA7A4009D3135 /* RangedWeapon.swift */,
-				2805F91A21EE7AD2009D3135 /* GoldBow.swift */,
-				2805F91C21EE7B88009D3135 /* DamagedBow.swift */,
 				28BB322421D8166B00ECCAC7 /* Bow.swift */,
+				2805F91C21EE7B88009D3135 /* DamagedBow.swift */,
+				2805F91A21EE7AD2009D3135 /* GoldBow.swift */,
 			);
 			path = RangedWeapon;
 			sourceTree = "<group>";
@@ -158,15 +162,17 @@
 			children = (
 				28BB315E21CA8CF800ECCAC7 /* Weapon.swift */,
 				28BB316D21CAC29000ECCAC7 /* Sword.swift */,
-				28BB316F21CAC29B00ECCAC7 /* Axe.swift */,
-				28BB317121CAC53900ECCAC7 /* Mace.swift */,
 				28BB321A21D5432A00ECCAC7 /* Trunk.swift */,
 				28BB321C21D5433A00ECCAC7 /* Lance.swift */,
+				28BB317121CAC53900ECCAC7 /* Mace.swift */,
+				28BB316F21CAC29B00ECCAC7 /* Axe.swift */,
 				28BB321E21D5434C00ECCAC7 /* Excalibur.swift */,
 				28BB318D21D3DF2D00ECCAC7 /* Wand.swift */,
 				28BB322221D5442300ECCAC7 /* MagicStick.swift */,
 				28BB322021D5441300ECCAC7 /* Parchment.swift */,
 				28BB322821D81CCE00ECCAC7 /* Curse.swift */,
+				2805F92321EFE6E8009D3135 /* WeakCurse.swift */,
+				2805F92521EFE73A009D3135 /* StrongCurse.swift */,
 				2805F92021EEA77A009D3135 /* RangedWeapon */,
 			);
 			path = Weapon;
@@ -233,11 +239,13 @@
 				28BB321B21D5432A00ECCAC7 /* Trunk.swift in Sources */,
 				28BB318E21D3DF2D00ECCAC7 /* Wand.swift in Sources */,
 				28BB322521D8166B00ECCAC7 /* Bow.swift in Sources */,
+				2805F92421EFE6E8009D3135 /* WeakCurse.swift in Sources */,
 				28BB316221CA8DC000ECCAC7 /* Warrior.swift in Sources */,
 				28BB322721D8187900ECCAC7 /* Archer.swift in Sources */,
 				28BB315F21CA8CF800ECCAC7 /* Weapon.swift in Sources */,
 				28BB316621CA8DFA00ECCAC7 /* Dwarf.swift in Sources */,
 				28BB317221CAC53900ECCAC7 /* Mace.swift in Sources */,
+				2805F92621EFE73A009D3135 /* StrongCurse.swift in Sources */,
 				28BB315121CA7C5900ECCAC7 /* main.swift in Sources */,
 				2805F91D21EE7B88009D3135 /* DamagedBow.swift in Sources */,
 				28BB316421CA8DDA00ECCAC7 /* Colossus.swift in Sources */,

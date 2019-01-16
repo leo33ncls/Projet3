@@ -88,7 +88,7 @@ class Game {
     func createPlayer() {
         print("Quel est votre nom ?")
         let player = Player(name: choiceName())
-        while player.team.count < 3 {
+        while player.team.count < 10 {
             createCharacter(player: player)
         }
         print("Votre équipe est complète, \(player.name). \n")
@@ -100,7 +100,7 @@ class Game {
     func teamInformation(player: Player) {
         print("Joueur: \(player.name)"
             + " \nL'équipe se compose de:")
-        for i in 0...2 {
+        for i in 0...9 {
             print("Un \(player.team[i].type) nommé \(player.team[i].characterName) armé d'un(e) \(player.team[i].weapon.name) ayant \(player.team[i].health) points de vie.")
         }
         print("\n")
@@ -110,7 +110,7 @@ class Game {
     // Method which allows to choice a character in your team
     func choiceCharacter(player: Player) -> Character {
         
-        for i in 0..<3 {
+        for i in 0..<10 {
             print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), arme: \(player.team[i].weapon.name))")
         }
         

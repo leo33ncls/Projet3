@@ -50,25 +50,23 @@ class Chest {
     func randomWeapon(character: Character) {
         if character is Magus {
             character.weapon = magicWeapon()
-            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) qui donne \(-(character.weapon.damage)) de vie. \n")
         } else if character is Archer{
             character.weapon = bows()
-            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) \n")
+        } else if character is Wizard {
+            character.weapon = Curse()
         } else {
             character.weapon = weapon()
-            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) qui inflige \(character.weapon.damage) de dégâts \n")
         }
     }
  
     
     // Method to make random the box's appearance
-    func randomBoxRound(character: Character) {
+    func randomBoxRound() -> Bool {
         let randomNumber = Int.random(in: 0...4)
         if randomNumber == 1 {
-            print("Un coffre vient d'apparaitre !")
-            randomWeapon(character: character)
+            return true
         } else {
-            print("Aucun coffre à l'horizon. \n")
+            return false
         }
     }
     

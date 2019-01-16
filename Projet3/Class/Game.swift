@@ -42,7 +42,8 @@ class Game {
             + " \n2 Le mage"
             + " \n3 Le colosse"
             + " \n4 Le nain"
-            + " \n5 L'archer")
+            + " \n5 L'archer"
+            + " \n6 Le sorcier")
         if let choice = readLine() {
             switch choice {
             case "1":
@@ -60,6 +61,9 @@ class Game {
             case "5":
                 print("Quel est le nom de votre archer ?")
                 player.team.append(Archer(characterName: choiceName()))
+            case "6":
+                print("Quel est le nom de votre sorcier ?")
+                player.team.append(Wizard(characterName: choiceName()))
             default:
                 print("Je n'ai pas compris. \n")
             }
@@ -82,7 +86,7 @@ class Game {
         print("Joueur: \(player.name)"
             + " \nL'équipe se compose de:")
         for i in 0...2 {
-            print("Un \(player.team[i].type) nommé \(player.team[i].characterName) armé \(player.team[i].weapon.name) ayant \(player.team[i].health) points de vie.")
+            print("Un \(player.team[i].type) nommé \(player.team[i].characterName) armé d'un(e) \(player.team[i].weapon.name) ayant \(player.team[i].health) points de vie.")
         }
         print("\n")
     }
@@ -98,10 +102,10 @@ class Game {
             if let index = Int(choice), player.team.indices.contains(index - 1) && player.team[index - 1].isAlive() {
                 return player.team[index - 1]
             } else if let index = Int(choice), player.team.indices.contains(index - 1) && !player.team[index - 1].isAlive() {
-                print("\(player.team[index - 1].characterName) est mort ! Choissisez un autre personnage.")
+                print("💀 \(player.team[index - 1].characterName) est mort ! Choissisez un autre personnage. \n")
                 return choiceCharacter(player: player)
             } else {
-                print("Choix non-valide. Réessayez.")
+                print("⚠️ Choix non-valide. Réessayez. \n")
                 return choiceCharacter(player: player)
             }
         } else {
@@ -109,16 +113,27 @@ class Game {
         }
     }
 
+    func chest(character: Character) {
+        let chest = Chest()
+        if chest.randomBoxRound() {
+            print("🎁 Un coffre vient d'apparaitre !")
+            chest.randomWeapon(character: character)
+            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) \n")
+        } else {
+            print("")
+        }
+    }
     
     // Method which reprensents a round
     func round(player: Player, playerEnemy: Player) {
         var characterFighter: Character
         var characterTarget: Character
+        var damages: Int
         
         print("\(player.name), quel personnage va attaquer l'ennemie ou soigner un allié ?")
         characterFighter = choiceCharacter(player: player)
         
-        Chest().randomBoxRound(character: characterFighter)
+        chest(character: characterFighter)
         
         if characterFighter is Magus {
             print("Quel personnage va être soigné ?")
@@ -128,24 +143,34 @@ class Game {
             characterTarget = choiceCharacter(player: playerEnemy)
         }
         
-        characterFighter.attack(target: characterTarget)
+        damages = characterFighter.attack(target: characterTarget)
         
-        roundInformation(characterFighter: characterFighter, characterTarget: characterTarget)
+        roundInformation(characterFighter: characterFighter, characterTarget: characterTarget, damages: damages)
     }
     
     
-    func roundInformation(characterFighter: Character, characterTarget: Character) {
+    func roundInformation(characterFighter: Character, characterTarget: Character, damages: Int) {
         
-        if characterFighter is Magus {
-            print("\(characterFighter.characterName) donne \(-characterFighter.weapon.damage) de vie à \(characterTarget.characterName). \n"
-                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
-        } else if characterFighter is Archer {
-            print("\(characterFighter.characterName) décoche une flêche sur \(characterTarget.characterName). \n"
-                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+        if characterFighter is Wizard {
+            print("\(characterFighter.characterName) lance une malédiction sur \(characterTarget.characterName).")
+            if let weapon = characterTarget.weapon as? RangedWeapon {
+                print("L'arc de \(characterTarget.characterName) inflige maintenant un maximum de \(weapon.damageMax) \n")
+            } else if characterTarget is Magus {
+                print("Le soin de \(characterTarget.characterName) donne maintenant \(-characterTarget.weapon.damage) de points de vie. \n")
+            } else {
+                print("L'arme de \(characterTarget.characterName) inflige maintenant \(characterTarget.weapon.damage) de dégats. \n" )
+            }
         } else {
-            print("\(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName). \n"
-                + "\(characterTarget.characterName) a maintenant \(characterTarget.health) de vie. \n" )
+            if characterFighter is Magus {
+                print("⛑ \(characterFighter.characterName) donne \(-damages) de vie à \(characterTarget.characterName).")
+            } else if characterFighter is Archer {
+                print("🏹 \(characterFighter.characterName) décoche une flêche de \(damages) de dégats sur \(characterTarget.characterName).")
+            } else {
+                print("⚔️ \(characterFighter.characterName) inflige \(characterFighter.weapon.damage) de dégats à \(characterTarget.characterName).")
+            }
+            print("\(characterTarget.characterName) a maintenant \(characterTarget.health) de points de vie. \n")
         }
+        
     }
     
     
@@ -157,8 +182,8 @@ class Game {
         } else {
             print("\(players[1].name) a gagné !")
         }
-        print("Statistiques finales: "
-            + " Nombre de round: \(numberOfRounds)")
+        print("\nStatistiques finales: "
+            + " Nombre de round: \(numberOfRounds) \n")
         teamInformation(player: players[0])
         teamInformation(player: players[1])
     }

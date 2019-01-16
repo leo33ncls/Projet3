@@ -12,6 +12,6 @@ class Warrior: Character {
     
     // Initialization
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Combattant", health: 100, healthMax: 100, weapon: Sword())
+        super.init(characterName: characterName, type: "Combattant", health: 100, weapon: Sword())
     }
 }

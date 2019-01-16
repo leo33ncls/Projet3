@@ -18,23 +18,25 @@ class Character {
     var weapon: Weapon
     
     // Initialization
-    init(characterName: String, type: String, health: Int, healthMax: Int, weapon: Weapon) {
+    init(characterName: String, type: String, health: Int, weapon: Weapon) {
         self.characterName = characterName
         self.type = type
         self.health = health
-        self.healthMax = healthMax
+        self.healthMax = health
         self.weapon = weapon
     }
     
     // Method which make the character's attacks
-    func attack(target: Character) {
-        if target.health < weapon.damage {
+    func attack(target: Character) -> Int {
+        let damage = weapon.damage
+        if target.health < damage {
             target.health = 0
-        } else if target.healthMax < (target.health - weapon.damage) {
+        } else if target.healthMax < (target.health - damage) {
             target.health = target.healthMax
         } else {
-            target.health -= weapon.damage
+            target.health -= damage
         }
+        return damage
     }
     
     // Method which checks if the player is alive

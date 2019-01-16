@@ -12,7 +12,7 @@ class Archer: Character {
     
     
     init(characterName: String) {
-        super.init(characterName: characterName, type: "Archer", health: 70, healthMax: 70, weapon: Bow())
+        super.init(characterName: characterName, type: "Archer", health: 70, weapon: Bow())
     }
     
 }

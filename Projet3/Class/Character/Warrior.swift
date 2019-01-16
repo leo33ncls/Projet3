@@ -8,6 +8,7 @@
 
 import Foundation
 
+// class that represents a warrior
 class Warrior: Character {
     
     // Initialization

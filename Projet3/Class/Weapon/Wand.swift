@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a wand
 class Wand: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "baguette magique", damage: -10)
     }

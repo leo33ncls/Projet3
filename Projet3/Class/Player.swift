@@ -8,15 +8,29 @@
 
 import Foundation
 
+// class which represents a player
 class Player {
     
+    
+    //======================
     // Properties
+    
+    // The name of the player
     var name: String
+    
+    // The player's team which contains characters
     var team = [Character]()
     
+    
+    //======================
+    // Initialization
     init(name: String) {
         self.name = name
     }
+    
+    
+    //======================
+    // Methods
     
     // Method which checks if the team are still alive
     func isTeamAlive() -> Bool{

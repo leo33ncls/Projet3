@@ -8,9 +8,10 @@
 
 import Foundation
 
+// class that represents an archer
 class Archer: Character {
     
-    
+    // Initialization
     init(characterName: String) {
         super.init(characterName: characterName, type: "Archer", health: 70, weapon: Bow())
     }

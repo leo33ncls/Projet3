@@ -8,15 +8,30 @@
 
 import Foundation
 
+// class that represents a character
 class Character {
     
+    
+    //======================
     // Properties
+    
+    // The name of the character
     var characterName: String
+    
+    // The type of the character
     var type: String
+    
+    // The health
     var health: Int
+    
+    // The maximum health
     var healthMax: Int
+    
+    // The character's weapon
     var weapon: Weapon
     
+    
+    //======================
     // Initialization
     init(characterName: String, type: String, health: Int, weapon: Weapon) {
         self.characterName = characterName
@@ -25,6 +40,10 @@ class Character {
         self.healthMax = health
         self.weapon = weapon
     }
+    
+    
+    //======================
+    // Methods
     
     // Method which make the character's attacks
     func attack(target: Character) -> Int {

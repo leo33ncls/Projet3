@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a parchment
 class Parchment: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "parchemin", damage: -20)
     }

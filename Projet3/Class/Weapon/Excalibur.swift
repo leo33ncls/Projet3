@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents an "Excalibur"
 class Excalibur: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "Excalibur", damage: 35)
     }

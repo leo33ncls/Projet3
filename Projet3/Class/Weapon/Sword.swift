@@ -8,6 +8,7 @@
 
 import Foundation
 
+// class that represents a sword
 class Sword: Weapon {
     
     // Initialization

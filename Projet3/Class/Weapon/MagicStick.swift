@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a magic sticks
 class MagicStick: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "bâton magique", damage: -5)
     }

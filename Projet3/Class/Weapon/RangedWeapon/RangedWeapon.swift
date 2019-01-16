@@ -8,11 +8,20 @@
 
 import Foundation
 
+// class that represents a ranged weapon
 class RangedWeapon: Weapon {
     
+    
+    //======================
+    // Properties
+    
+    // The minimum damage of the weapon
     var damageMin: Int
+    
+    // The maximum damage
     var damageMax: Int
     
+    // The damage inflicted by the weapon
     override var damage: Int {
         get {
             return Int.random(in: damageMin...damageMax)
@@ -20,6 +29,9 @@ class RangedWeapon: Weapon {
         set {}
     }
     
+    
+    //======================
+    // Initialization
     init(name: String, damage: Int, damageMin: Int, damageMax: Int) {
         self.damageMin = damageMin
         self.damageMax = damageMax

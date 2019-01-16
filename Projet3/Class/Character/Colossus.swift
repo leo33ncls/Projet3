@@ -8,6 +8,7 @@
 
 import Foundation
 
+// class that represents a colossus
 class Colossus: Character {
     
     // Initialization

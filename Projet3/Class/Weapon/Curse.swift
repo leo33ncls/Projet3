@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a curse
 class Curse: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "malédiction", damage: 2)
     }

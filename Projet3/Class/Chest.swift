@@ -8,8 +8,14 @@
 
 import Foundation
 
+// class that represents a chest
 class Chest {
     
+    
+    //======================
+    // Methods
+    
+    // Method giving a random weapon
     func weapon() -> Weapon {
         let randomNumber = Int.random(in: 1...6)
         switch randomNumber {
@@ -24,6 +30,7 @@ class Chest {
         }
     }
     
+    // Method giving a random magic weapon
     func magicWeapon() -> Weapon {
         let randomNumber = Int.random(in: 1...3)
         switch randomNumber {
@@ -35,6 +42,7 @@ class Chest {
         }
     }
     
+    // Method giving a random bow
     func bows() -> Weapon {
         let randomNumber = Int.random(in: 1...3)
         switch randomNumber {
@@ -46,7 +54,7 @@ class Chest {
         }
     }
     
-    // Method which give a random weapon
+    // Method that assigns a weapon to a character
     func randomWeapon(character: Character) {
         if character is Magus {
             character.weapon = magicWeapon()

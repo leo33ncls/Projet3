@@ -8,12 +8,21 @@
 
 import Foundation
 
+// class that represents a weapon
 class Weapon {
     
+    
+    //======================
     // Properties
+    
+    // The name of the weapon
     var name: String
+    
+    // The damage inflicted by the weapon
     var damage: Int
     
+    
+    //======================
     // Initialization
     init(name: String ,damage: Int) {
         self.name = name

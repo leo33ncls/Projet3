@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a trunk
 class Trunk: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "tronc d'arbre", damage: 5)
     }

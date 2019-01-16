@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a lance
 class Lance: Weapon {
     
+    // Initialization
     init() {
         super.init(name: "lance", damage: 8)
     }

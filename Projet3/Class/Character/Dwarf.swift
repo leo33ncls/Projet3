@@ -8,6 +8,7 @@
 
 import Foundation
 
+// class that represents dwarf
 class Dwarf: Character {
     
     // Initialization

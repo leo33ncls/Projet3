@@ -8,12 +8,19 @@
 
 import Foundation
 
+// class that represents a wizard
 class Wizard: Character {
     
+    
+    //======================
+    // Initialization
     init(characterName: String) {
         super.init(characterName: characterName, type: "Sorcier", health: 60, weapon: Curse())
     }
     
+    
+    //======================
+    // Method which make the character's attacks
     override func attack(target: Character) -> Int {
         if target is Magus {
             if  -weapon.damage < target.weapon.damage {

@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a bow
 class Bow: RangedWeapon {
     
+    // Initialization
     init() {
         super.init(name: "arc", damage: 10, damageMin: 0, damageMax: 20)
     }

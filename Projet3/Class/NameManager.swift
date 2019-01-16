@@ -8,9 +8,19 @@
 
 import Foundation
 
+// class that manages names
 class NameManager {
     
+    
+    //======================
+    // Properties
+    
+    // Array which contains all the name of the game
     var nameArray = [String]()
+    
+    
+    //======================
+    //Methods
     
     // Method to check if the name is valid
     func isNameValid(name: String) -> Bool {

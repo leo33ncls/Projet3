@@ -8,6 +8,7 @@
 
 import Foundation
 
+// class that represents an axe
 class Axe: Weapon {
     
     // Initialization

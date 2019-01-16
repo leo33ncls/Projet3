@@ -8,15 +8,27 @@
 
 import Foundation
 
+
 class Game {
     
+    //======================
     // Properties
+    //======================
+    
+    // Array which contains the players of the game
     var players = [Player]()
+    
+    // Variable with the number of rounds
     var numberOfRounds = 1
+    
+    // Variable which stocks a instance of NameManager
     var nameManager = NameManager()
     
     
+    
+    //======================
     // Methods
+    //======================
     
     // Method to retrieve a name
     func choiceName() -> String {
@@ -35,7 +47,8 @@ class Game {
         return name
     }
     
-    // Method allowing to create a team of 3 characters with their name
+    
+    // Method allowing to create a character with his name
     func createCharacter(player: Player) {
         print("Choisissez un personnage"
             + " \n1 Le combattant"
@@ -70,6 +83,7 @@ class Game {
         }
     }
     
+    
     // Method which creates a player
     func createPlayer() {
         print("Quel est votre nom ?")
@@ -81,6 +95,7 @@ class Game {
         players.append(player)
     }
     
+    
     // Method which displays the team's information
     func teamInformation(player: Player) {
         print("Joueur: \(player.name)"
@@ -90,6 +105,7 @@ class Game {
         }
         print("\n")
     }
+    
     
     // Method which allows to choice a character in your team
     func choiceCharacter(player: Player) -> Character {
@@ -113,6 +129,8 @@ class Game {
         }
     }
 
+    
+    // Method which creates a instance of the class Chest
     func chest(character: Character) {
         let chest = Chest()
         if chest.randomBoxRound() {
@@ -123,6 +141,7 @@ class Game {
             print("")
         }
     }
+    
     
     // Method which reprensents a round
     func round(player: Player, playerEnemy: Player) {
@@ -149,6 +168,7 @@ class Game {
     }
     
     
+    // Method which give the final information of the round
     func roundInformation(characterFighter: Character, characterTarget: Character, damages: Int) {
         
         if characterFighter is Wizard {
@@ -174,7 +194,6 @@ class Game {
     }
     
     
-    
     // Method which gives de final statistics
     func finalInformation() {
         if players[0].isTeamAlive() {
@@ -188,6 +207,11 @@ class Game {
         teamInformation(player: players[1])
     }
     
+    
+    
+    //======================
+    // Logic
+    //======================
     
     // The logic of the game
     func newGame() {
@@ -207,4 +231,5 @@ class Game {
         print("La partie est finie !")
         finalInformation()
     }
+    
 }

@@ -8,8 +8,10 @@
 
 import Foundation
 
+// class that represents a gold bow
 class GoldBow: RangedWeapon {
     
+    // Initialization
     init() {
         super.init(name: "arc en or", damage: 20, damageMin: 10, damageMax: 30)
     }

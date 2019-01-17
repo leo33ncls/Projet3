@@ -27,18 +27,57 @@ class Game {
     
     
     //======================
+    // Logic
+    //======================
+    
+    // The logic of the game
+    func newGame() {
+        
+        while players.count < 2 {
+            createPlayer()
+        }
+        teamInformation(player: players[0])
+        teamInformation(player: players[1])
+        
+        while players[0].isTeamAlive() && players[1].isTeamAlive() {
+            round(player: players[0], playerEnemy: players[1])
+            numberOfRounds += 1
+            if players[0].isTeamAlive() && players[1].isTeamAlive() {
+                round(player: players[1], playerEnemy: players[0])
+                numberOfRounds += 1
+            }
+        }
+        print("La partie est finie !")
+        finalInformation()
+    }
+    
+    
+    
+    //======================
     // Methods
     //======================
     
+    // Method which creates a player
+    private func createPlayer() {
+        print("Quel est votre nom ?")
+        
+        let player = Player(name: choiceName())
+        while player.team.count < 3 {
+            createCharacter(player: player)
+        }
+        print("Votre équipe est complète, \(player.name). \n")
+        players.append(player)
+    }
+    
+    
     // Method to retrieve a name
-    func choiceName() -> String {
+    private func choiceName() -> String {
         var name: String
         
         if let choice = readLine() {
             
             if nameManager.isNameValid(name: choice) {
                 name = choice
-                nameManager.nameArray.append(name)
             } else {
                 print("⚠️ Nom trop court ou déjà utilisé. Choisissez un nouveau nom.")
                 return choiceName()
@@ -52,7 +91,7 @@ class Game {
     
     
     // Method allowing to create a character with his name
-    func createCharacter(player: Player) {
+    private func createCharacter(player: Player) {
         print("Choisissez un personnage"
             + " \n1 Le combattant"
             + " \n2 Le mage"
@@ -89,25 +128,12 @@ class Game {
     }
     
     
-    // Method which creates a player
-    func createPlayer() {
-        print("Quel est votre nom ?")
-        
-        let player = Player(name: choiceName())
-        while player.team.count < 10 {
-            createCharacter(player: player)
-        }
-        print("Votre équipe est complète, \(player.name). \n")
-        players.append(player)
-    }
-    
-    
     // Method which displays the team's information
-    func teamInformation(player: Player) {
+    private func teamInformation(player: Player) {
         print("Joueur: \(player.name)"
             + " \nL'équipe se compose de:")
         
-        for i in 0...9 {
+        for i in 0...(player.team.count - 1) {
             print("Un \(player.team[i].type) nommé \(player.team[i].characterName) armé d'un(e) \(player.team[i].weapon.name) ayant \(player.team[i].health) points de vie.")
         }
         print("\n")
@@ -115,10 +141,14 @@ class Game {
     
     
     // Method which allows to choice a character in your team
-    func choiceCharacter(player: Player) -> Character {
+    private func choiceCharacter(player: Player) -> Character {
         
-        for i in 0..<10 {
-            print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), arme: \(player.team[i].weapon.name))")
+        for i in 0..<player.team.count {
+            if let weapon = player.team[i].weapon as? RangedWeapon {
+                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: (\(weapon.damageMin)-\(weapon.damageMax))")
+            } else {
+                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: \(player.team[i].weapon.name) (\(player.team[i].weapon.damage))")
+            }
         }
         
         if let choice = readLine() {
@@ -141,22 +171,19 @@ class Game {
 
     
     // Method which creates a instance of the class Chest
-    func chest(character: Character) {
+    private func chest(character: Character) {
         let chest = Chest()
         
         if chest.randomBoxRound() {
             print("🎁 Un coffre vient d'apparaitre !")
             chest.randomWeapon(character: character)
             print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) \n")
-            
-        } else {
-            print("")
         }
     }
     
     
     // Method which reprensents a round
-    func round(player: Player, playerEnemy: Player) {
+    private func round(player: Player, playerEnemy: Player) {
         var characterFighter: Character
         var characterTarget: Character
         var damage: Int
@@ -182,7 +209,7 @@ class Game {
     
     
     // Method which give the final information of the round
-    func roundInformation(characterFighter: Character, characterTarget: Character, damage: Int) {
+    private func roundInformation(characterFighter: Character, characterTarget: Character, damage: Int) {
         
         if characterFighter is Wizard {
             print("\(characterFighter.characterName) lance une \(characterFighter.weapon.name) sur \(characterTarget.characterName).")
@@ -209,7 +236,7 @@ class Game {
     
     
     // Method which gives de final statistics
-    func finalInformation() {
+    private func finalInformation() {
         
         if players[0].isTeamAlive() {
             print("\(players[0].name) a gagné !")
@@ -223,31 +250,5 @@ class Game {
         teamInformation(player: players[1])
     }
     
-    
-    
-    //======================
-    // Logic
-    //======================
-    
-    // The logic of the game
-    func newGame() {
-        
-        while players.count < 2 {
-             createPlayer()
-        }
-        teamInformation(player: players[0])
-        teamInformation(player: players[1])
-        
-        while players[0].isTeamAlive() && players[1].isTeamAlive() {
-            round(player: players[0], playerEnemy: players[1])
-            numberOfRounds += 1
-            if players[0].isTeamAlive() && players[1].isTeamAlive() {
-                round(player: players[1], playerEnemy: players[0])
-                numberOfRounds += 1
-            }
-        }
-        print("La partie est finie !")
-        finalInformation()
-    }
     
 }

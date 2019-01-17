@@ -16,7 +16,7 @@ class NameManager {
     // Properties
     
     // Array which contains all the name of the game
-    var nameArray = [String]()
+    private var nameArray = [String]()
     
     
     //======================
@@ -27,6 +27,7 @@ class NameManager {
         if name.count < 2 || nameArray.contains(name) {
             return false
         } else {
+            nameArray.append(name)
             return true
         }
     }

@@ -30,7 +30,7 @@ class Wizard: Character {
                 target.weapon.damage += weapon.damage
             }
             
-        } else if target is Wizard {
+        } else if target is Wizard {    // the attack removes all the damage from the target's curse but sacrifices his own curse
             target.weapon.damage = 0
             weapon.damage = 0
             

@@ -16,7 +16,7 @@ class Chest {
     // Methods
     
     // Method giving a random weapon
-    func weapon() -> Weapon {
+    private func weapon() -> Weapon {
         let randomNumber = Int.random(in: 1...6)
         switch randomNumber {
         case 1: return Sword()
@@ -31,7 +31,7 @@ class Chest {
     }
     
     // Method giving a random magic weapon
-    func magicWeapon() -> Weapon {
+    private func magicWeapon() -> Weapon {
         let randomNumber = Int.random(in: 1...3)
         switch randomNumber {
         case 1: return Wand()
@@ -43,7 +43,7 @@ class Chest {
     }
     
     // Method giving a random bow
-    func bows() -> Weapon {
+    private func bows() -> Weapon {
         let randomNumber = Int.random(in: 1...3)
         switch randomNumber {
         case 1: return Bow()
@@ -55,7 +55,7 @@ class Chest {
     }
     
     // Method giving a random curse
-    func curses() -> Weapon {
+    private func curses() -> Weapon {
         let randomNumber = Int.random(in: 1...3)
         switch randomNumber {
         case 1: return Curse()
@@ -83,7 +83,7 @@ class Chest {
     
     // Method to make random the box's appearance
     func randomBoxRound() -> Bool {
-        let randomNumber = Int.random(in: 0...4)
+        let randomNumber = Int.random(in: 1...5)
         if randomNumber == 1 {
             return true
         } else {

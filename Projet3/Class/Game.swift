@@ -33,6 +33,7 @@ class Game {
     // The logic of the game
     func newGame() {
         
+        print("Bienvenue !")
         while players.count < 2 {
             createPlayer()
         }
@@ -65,7 +66,7 @@ class Game {
         while player.team.count < 3 {
             createCharacter(player: player)
         }
-        print("Votre équipe est complète, \(player.name). \n")
+        print("\nVotre équipe est complète, \(player.name). \n")
         players.append(player)
     }
     
@@ -92,7 +93,7 @@ class Game {
     
     // Method allowing to create a character with his name
     private func createCharacter(player: Player) {
-        print("Choisissez un personnage"
+        print("\nChoisissez un personnage"
             + " \n1 Le combattant"
             + " \n2 Le mage"
             + " \n3 Le colosse"
@@ -104,25 +105,25 @@ class Game {
             
             switch choice {
             case "1":
-                print("Quel est le nom de votre combattant ?")
+                print("\nQuel est le nom de votre combattant ?")
                 player.team.append(Warrior(characterName: choiceName()))
             case "2":
-                print("Quel est le nom de votre mage ?")
+                print("\nQuel est le nom de votre mage ?")
                 player.team.append(Magus(characterName: choiceName()))
             case "3":
-                print("Quel est le nom de votre colosse ?")
+                print("\nQuel est le nom de votre colosse ?")
                 player.team.append(Colossus(characterName: choiceName()))
             case "4":
-                print("Quel est le nom de votre nain ?")
+                print("\nQuel est le nom de votre nain ?")
                 player.team.append(Dwarf(characterName: choiceName()))
             case "5":
-                print("Quel est le nom de votre archer ?")
+                print("\nQuel est le nom de votre archer ?")
                 player.team.append(Archer(characterName: choiceName()))
             case "6":
-                print("Quel est le nom de votre sorcier ?")
+                print("\nQuel est le nom de votre sorcier ?")
                 player.team.append(Wizard(characterName: choiceName()))
             default:
-                print("Je n'ai pas compris. \n")
+                print("⚠️ Je n'ai pas compris. Réessayez.")
             }
         }
     }
@@ -145,9 +146,11 @@ class Game {
         
         for i in 0..<player.team.count {
             if let weapon = player.team[i].weapon as? RangedWeapon {
-                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: (\(weapon.damageMin)-\(weapon.damageMax))")
+                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: \(weapon.damageMin)-\(weapon.damageMax))")
+            } else if player.team[i] is Wizard {
+                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: M\(player.team[i].weapon.damage))")
             } else {
-                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: \(player.team[i].weapon.name) (\(player.team[i].weapon.damage))")
+                print("\(i + 1)/ \(player.team[i].characterName) (vie: \(player.team[i].health)/\(player.team[i].healthMax), dégâts: \(player.team[i].weapon.damage))")
             }
         }
         
@@ -177,7 +180,7 @@ class Game {
         if chest.randomBoxRound() {
             print("🎁 Un coffre vient d'apparaitre !")
             chest.randomWeapon(character: character)
-            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name) \n")
+            print("\(character.characterName) est maintenant équipé d'un(e) \(character.weapon.name).\n")
         }
     }
     
@@ -218,6 +221,8 @@ class Game {
                 print("L'arc de \(characterTarget.characterName) inflige maintenant un maximum de \(weapon.damageMax) \n")
             } else if characterTarget is Magus {
                 print("Le soin de \(characterTarget.characterName) donne maintenant \(-characterTarget.weapon.damage) de points de vie. \n")
+            } else if characterTarget is Wizard {
+                print("Sacrifice de la malédiction: \(characterFighter.characterName) et \(characterTarget.characterName) ont mainteant des malédictions infligeants 0 de dégâts. \n")
             } else {
                 print("L'arme de \(characterTarget.characterName) inflige maintenant \(characterTarget.weapon.damage) de dégats. \n" )
             }
